@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.leunesmedia.soundhub.Adapters.RecyclerViewAdapter
 import com.leunesmedia.soundhub.Domain.Post
 import com.leunesmedia.soundhub.R
@@ -30,6 +31,8 @@ class Fragment_Posts : Fragment() {
     }
 
     private  fun addPostsToPosts() {
+        val toast = Toast.makeText(this.context, "Test", Toast.LENGTH_SHORT)
+        toast.show()
         posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
         posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
         posts.add(Post(1, "Ik kan zingen!", "3", "lorem ipsum lorem ipsum lorem ipsum"))
