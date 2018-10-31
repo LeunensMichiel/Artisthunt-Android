@@ -16,6 +16,7 @@ class Fragment_Posts : Fragment() {
     var posts : ArrayList<Post> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        addPostsToPosts()
         val view = inflater.inflate(R.layout.posts_fragment, container, false)
         val recview = view.findViewById(R.id.posts_recyclerview) as RecyclerView
         val adapter = RecyclerViewAdapter(posts, activity as Context)
@@ -26,7 +27,9 @@ class Fragment_Posts : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    private  fun addPostsToPosts() {
         posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
         posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
         posts.add(Post(1, "Ik kan zingen!", "3", "lorem ipsum lorem ipsum lorem ipsum"))

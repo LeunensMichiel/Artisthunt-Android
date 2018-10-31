@@ -26,7 +26,7 @@ class RecyclerViewAdapter(val items : ArrayList<Post>, val context : Context) : 
 
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titel = itemView.findViewById<TextView>(R.id.titel)
-        val tekst = itemView.findViewById<TextView>(R.id.tekst)
+        val titel = itemView.titel
+        val tekst = itemView.tekst
     }
 }
