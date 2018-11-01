@@ -32,8 +32,6 @@ class Fragment_Posts : Fragment() {
     }
 
     private  fun addPostsToPosts() {
-        val toast = Toast.makeText(this.context, "Test", Toast.LENGTH_SHORT)
-        toast.show()
 
         posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
         posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
