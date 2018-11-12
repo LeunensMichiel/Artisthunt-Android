@@ -5,9 +5,6 @@
               android:layout_height="match_parent"
               android:background="@color/backgroundFragment"
 >
-    <TextView
-            android:text="Profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"/>
+    <ImageView android:layout_width="match_parent" android:layout_height="150dp"
+    android:src="@drawable/ic_account_circle"/>
 </LinearLayout>
