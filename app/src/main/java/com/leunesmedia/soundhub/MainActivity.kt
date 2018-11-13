@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.leunesmedia.soundhub.Adapters.ViewPageAdapter
@@ -17,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     var tabLayout : TabLayout? = null
     var viewPager : ViewPager? = null
     var adapter : ViewPageAdapter? = null
+    var mainToolbar : Toolbar ?= null
     lateinit var mAuth: FirebaseAuth
 
 
@@ -24,8 +29,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mainToolbar = findViewById(R.id.main_toolbar)
+        setSupportActionBar(mainToolbar)
+        supportActionBar!!.elevation = 0F
+
         mAuth = FirebaseAuth.getInstance()
 
+        initTabs()
+
+
+    }
+
+    private fun initTabs() {
         tabLayout = findViewById(R.id.tablelayout_id)
         viewPager = findViewById(R.id.viewpager_id)
 
@@ -43,8 +58,6 @@ class MainActivity : AppCompatActivity() {
         tabLayout!!.getTabAt(1)?.setIcon(R.drawable.ic_add_circle)
         tabLayout!!.getTabAt(2)?.setIcon(R.drawable.ic_search)
         tabLayout!!.getTabAt(3)?.setIcon(R.drawable.ic_account_circle)
-
-        supportActionBar!!.elevation = 0F
     }
 
     override fun onStart() {
@@ -53,9 +66,35 @@ class MainActivity : AppCompatActivity() {
         var currentUser: FirebaseUser? = mAuth.currentUser
 
         if (currentUser == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
+            sendToLoginActivity()
         }
+    }
+
+    private fun sendToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_logoutBtn -> {
+                logOut()
+                return true
+            }
+            else -> return false
+        }
+        return false
+    }
+
+    private fun logOut() {
+        mAuth.signOut()
+        Toast.makeText(this, "Logout Succesful", Toast.LENGTH_SHORT).show()
+        sendToLoginActivity()
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
@@ -33,16 +34,18 @@ class LoginActivity : AppCompatActivity() {
                 mAuth.signInWithEmailAndPassword(loginEmailText.text.toString(), loginPassText.text.toString())
                     .addOnCompleteListener() { t ->
                         if (t.isSuccessful) {
+                            Toast.makeText(this, "Login Succesful", Toast.LENGTH_SHORT).show()
                             sendToMain()
                         } else {
                             Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
                         }
                         procbar.visibility = View.INVISIBLE
                     }
-
             }
         }
-
+        buttonRegister.setOnClickListener() {
+            sendToRegister()
+        }
     }
 
     override fun onStart() {
@@ -57,6 +60,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun sendToMain() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun sendToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }

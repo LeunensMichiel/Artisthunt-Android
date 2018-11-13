@@ -8,6 +8,14 @@
         tools:context=".MainActivity"
         android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?android:attr/actionBarSize"
+            android:id="@+id/main_toolbar"/>
+
     <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
