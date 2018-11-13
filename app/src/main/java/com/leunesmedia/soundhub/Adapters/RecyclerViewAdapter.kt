@@ -29,9 +29,9 @@ class RecyclerViewAdapter(val items: ArrayList<Post>, val context: Context) :
         val titel = postDialog.findViewById<TextView>(R.id.dialogtitel)
         val tekst = postDialog.findViewById<TextView>(R.id.dialogtekst)
 
-        vholder.postitem.setOnLongClickListener { v ->
-            titel.text = items.get(vholder.adapterPosition).titel
-            tekst.text = items.get(vholder.adapterPosition).tekst
+        vholder.postitem.setOnLongClickListener { _ ->
+            titel.text = items[vholder.adapterPosition].titel
+            tekst.text = items[vholder.adapterPosition].tekst
             postDialog.show()
             return@setOnLongClickListener true
         }
@@ -45,8 +45,8 @@ class RecyclerViewAdapter(val items: ArrayList<Post>, val context: Context) :
     }
 
     override fun onBindViewHolder(p0: PostViewHolder, p1: Int) {
-        p0.titel.text = items.get(p1).titel
-        p0.tekst.text = items.get(p1).tekst
+        p0.titel.text = items[p1].titel
+        p0.tekst.text = items[p1].tekst
     }
 
 
