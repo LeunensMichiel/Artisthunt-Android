@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
                         run {
                             if (t.isSuccessful) {
                                 Toast.makeText(this, "Registry Succesful", Toast.LENGTH_SHORT).show()
-                                sendToMain()
+                                sentToSetup()
                             } else {
                                 Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
                             }
@@ -75,7 +75,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun sendToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+        finish()
+    }
+
+    private fun sentToSetup() {
+        val intent = Intent(this, SetupActivity::class.java)
         startActivity(intent)
         finish()
     }
