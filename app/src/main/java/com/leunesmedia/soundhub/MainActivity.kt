@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 logOut()
                 return true
             }
-            R.id.menu_logoutBtn -> {
+            R.id.menu_settingsBtn -> {
                 val intent = Intent(this, SetupActivity::class.java)
                 startActivity(intent)
             }

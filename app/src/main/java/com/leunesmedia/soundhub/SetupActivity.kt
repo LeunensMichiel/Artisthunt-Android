@@ -13,10 +13,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -25,9 +30,12 @@ import kotlinx.android.synthetic.main.activity_setup.*
 
 class SetupActivity : AppCompatActivity() {
     lateinit var img: CircularImageView
+    lateinit var usrID: String
     lateinit var profilePic : Uri
+    private  var isChanged: Boolean = false
     lateinit var mAuth: FirebaseAuth
     lateinit var mStorage: StorageReference
+    lateinit var mfireStore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +48,9 @@ class SetupActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         mStorage = FirebaseStorage.getInstance().reference
+        mfireStore = FirebaseFirestore.getInstance()
+
+        usrID = mAuth.currentUser!!.uid
 
 
         img = findViewById(R.id.setupImage)
@@ -47,24 +58,58 @@ class SetupActivity : AppCompatActivity() {
         val setupBtn = findViewById<Button>(R.id.setupBtn)
         val setupProgress = findViewById<ProgressBar>(R.id.setupProgress)
 
-        setupBtn.setOnClickListener() {
-            val usrnName = setupName.text.toString()
+        setupBtn.isEnabled = false
+        setupProgress.visibility = View.VISIBLE
 
-            //mss ook checken op profilePic?
-            if (usrnName.isNotEmpty() ) {
-                val usrID: String = mAuth.currentUser!!.uid
-                val imgPath : StorageReference = mStorage.child("profile_pictures").child(usrID + ",jpg")
-                setupProgress.visibility = View.VISIBLE
 
-                imgPath.putFile(profilePic).addOnCompleteListener() { t ->
-                    if (t.isSuccessful) {
-                        val uri : Task<Uri> = t.result.storage.downloadUrl
-                    } else {
-                        Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
-                    }
+        mfireStore.collection("Users").document(usrID).get().addOnCompleteListener() { t ->
+            if (t.isSuccessful) {
+                if (t.result.exists()) {
+                    val usrname: String = t.result.getString("name")!!
+                    val img: String = t.result.getString("image")!!
 
-                    setupProgress.visibility = View.INVISIBLE
+                    profilePic = Uri.parse(img)
+
+                    setupName.setText(usrname)
+
+                    val placeholder : RequestOptions = RequestOptions()
+                    placeholder.placeholder(R.mipmap.profilepic_foreground)
+                    Glide.with(this).setDefaultRequestOptions(placeholder).load(profilePic).into(setupImage)
                 }
+            } else {
+                Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
+            }
+            setupProgress.visibility = View.INVISIBLE
+            setupBtn.isEnabled = true
+        }
+
+        setupBtn.setOnClickListener() {
+            val usrName = setupName.text.toString()
+            setupProgress.visibility = View.VISIBLE
+
+            if (isChanged) {
+                //mss ook checken op profilePic?
+                if (usrName.isNotEmpty() ) {
+                    val imgPath : StorageReference = mStorage.child("profile_pictures").child(usrID + ".jpg")
+
+                    imgPath.putFile(profilePic).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        return@Continuation imgPath.downloadUrl
+                    }).addOnCompleteListener { t ->
+                        if (t.isSuccessful) {
+                            storeIntoFirebase(t, usrName, setupProgress)
+                        } else {
+                            Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
+                            setupProgress.visibility = View.INVISIBLE
+                        }
+                    }
+                }
+            } else {
+                storeIntoFirebase(null, usrName, setupProgress)
             }
         }
 
@@ -78,13 +123,47 @@ class SetupActivity : AppCompatActivity() {
                     ActivityCompat.requestPermissions(this,
                         arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
                 } else {
-                    CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setAspectRatio(1,1)
-                        .start(this)
+                    selectImage()
                 }
+            } else {
+                selectImage()
             }
         }
+    }
+
+    private fun storeIntoFirebase(
+        t: Task<Uri>?,
+        usrName: String,
+        setupProgress: ProgressBar
+    ) {
+        val uri : Uri
+        if (t != null) {
+            uri = t.result
+        } else {
+            uri = profilePic
+        }
+
+        val USERS: MutableMap<String, Any> = HashMap()
+        USERS.put("name", usrName)
+        USERS.put("image", uri.toString())
+
+        mfireStore.collection("Users").document(usrID).set(USERS).addOnCompleteListener() { t ->
+            if (t.isSuccessful) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, t.exception?.message, Toast.LENGTH_LONG).show()
+            }
+            setupProgress.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun selectImage() {
+        CropImage.activity()
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .setAspectRatio(1, 1)
+            .start(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,6 +172,8 @@ class SetupActivity : AppCompatActivity() {
             if (resultCode === RESULT_OK) {
                 this.profilePic = result.uri
                 setupImage.setImageURI(profilePic)
+
+                isChanged = true
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error
             }

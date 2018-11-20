@@ -75,7 +75,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun sendToLogin() {
-        finish()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     private fun sentToSetup() {
