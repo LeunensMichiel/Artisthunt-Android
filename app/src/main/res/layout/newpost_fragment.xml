@@ -3,7 +3,6 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/backgroundFragment"
               android:padding="15dp">
 
     <ScrollView android:layout_width="match_parent"
@@ -13,34 +12,19 @@
                       android:layout_height="match_parent"
                       android:orientation="vertical">
 
-            <RelativeLayout android:layout_width="match_parent" android:layout_height="250dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="center_vertical">
-                <ImageView android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:background="@color/colorPrimary"
-                />
-                <TextView
-                        android:text="ZOEKERTJE TOEVOEGEN"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#FFF"
-                        android:gravity="center_horizontal"
-                        android:textSize="48sp"
-                        android:layout_centerInParent="true"
-                />
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="200dp"
+                       android:background="@color/colorPrimary"
+                       android:src="@drawable/ic_image_white_24dp" android:id="@+id/new_post_image"/>
 
-            </RelativeLayout>
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
-                    android:hint="locatie"
-                    android:textColorHint="@color/colorPrimary"
+                    android:hint="Locatie"
                     android:ems="10"
-                    android:id="@+id/locatie_id_toevoegen"
+                    android:id="@+id/new_post_location"
                     android:textColor="#FFF"
                     android:backgroundTint="#FFF"/>
             <EditText
@@ -48,9 +32,17 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:hint="Titel"
-                    android:textColorHint="@color/colorPrimary"
                     android:ems="10"
-                    android:id="@+id/titel_id_toevoegen"
+                    android:id="@+id/new_post_title"
+                    android:textColor="#FFF"
+                    android:backgroundTint="#FFF"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Genre"
+                    android:ems="10"
+                    android:id="@+id/new_post_genre"
                     android:textColor="#FFF"
                     android:backgroundTint="#FFF"/>
             <EditText
@@ -59,9 +51,8 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:hint="Beschrijving"
-                    android:textColorHint="@color/colorPrimary"
                     android:gravity="top"
-                    android:id="@+id/tekst_id_toevoegen"
+                    android:id="@+id/new_post_description"
                     android:textColor="#FFF"
                     android:backgroundTint="#FFF"/>
 
@@ -77,7 +68,7 @@
                     android:paddingRight="70dp"
                     android:text="Submit"
                     android:layout_marginBottom="15dp"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff" android:id="@+id/new_post_submit"/>
         </LinearLayout>
 
     </ScrollView>

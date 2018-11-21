@@ -31,8 +31,8 @@ import kotlinx.android.synthetic.main.activity_setup.*
 class SetupActivity : AppCompatActivity() {
     lateinit var img: CircularImageView
     lateinit var usrID: String
-    lateinit var profilePic : Uri
-    private  var isChanged: Boolean = false
+    lateinit var profilePic: Uri
+    private var isChanged: Boolean = false
     lateinit var mAuth: FirebaseAuth
     lateinit var mStorage: StorageReference
     lateinit var mfireStore: FirebaseFirestore
@@ -72,7 +72,7 @@ class SetupActivity : AppCompatActivity() {
 
                     setupName.setText(usrname)
 
-                    val placeholder : RequestOptions = RequestOptions()
+                    val placeholder: RequestOptions = RequestOptions()
                     placeholder.placeholder(R.mipmap.profilepic_foreground)
                     Glide.with(this).setDefaultRequestOptions(placeholder).load(profilePic).into(setupImage)
                 }
@@ -85,21 +85,23 @@ class SetupActivity : AppCompatActivity() {
 
         setupBtn.setOnClickListener() {
             val usrName = setupName.text.toString()
-            setupProgress.visibility = View.VISIBLE
+            if (usrName.isNotEmpty()) {
 
-            if (isChanged) {
-                //mss ook checken op profilePic?
-                if (usrName.isNotEmpty() ) {
-                    val imgPath : StorageReference = mStorage.child("profile_pictures").child(usrID + ".jpg")
+                setupProgress.visibility = View.VISIBLE
 
-                    imgPath.putFile(profilePic).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                        if (!task.isSuccessful) {
-                            task.exception?.let {
-                                throw it
+                if (isChanged) {
+                    //mss ook checken op profilePic?
+                    val imgPath: StorageReference = mStorage.child("profile_pictures").child(usrID + ".jpg")
+
+                    imgPath.putFile(profilePic)
+                        .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                            if (!task.isSuccessful) {
+                                task.exception?.let {
+                                    throw it
+                                }
                             }
-                        }
-                        return@Continuation imgPath.downloadUrl
-                    }).addOnCompleteListener { t ->
+                            return@Continuation imgPath.downloadUrl
+                        }).addOnCompleteListener { t ->
                         if (t.isSuccessful) {
                             storeIntoFirebase(t, usrName, setupProgress)
                         } else {
@@ -107,21 +109,33 @@ class SetupActivity : AppCompatActivity() {
                             setupProgress.visibility = View.INVISIBLE
                         }
                     }
+                } else {
+                    storeIntoFirebase(null, usrName, setupProgress)
                 }
-            } else {
-                storeIntoFirebase(null, usrName, setupProgress)
             }
         }
 
         img.setOnClickListener() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,
-                        arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+                    )
                 }
-                if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,
-                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1
+                    )
                 } else {
                     selectImage()
                 }
@@ -136,7 +150,7 @@ class SetupActivity : AppCompatActivity() {
         usrName: String,
         setupProgress: ProgressBar
     ) {
-        val uri : Uri
+        val uri: Uri
         if (t != null) {
             uri = t.result
         } else {

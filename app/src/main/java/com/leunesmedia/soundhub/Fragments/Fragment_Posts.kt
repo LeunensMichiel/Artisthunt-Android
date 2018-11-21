@@ -31,41 +31,7 @@ class Fragment_Posts : Fragment() {
 
     }
 
-    private  fun addPostsToPosts() {
-
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum" ))
-        posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Ik kan zingen!", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Wij zoeken een drummer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGERES GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "DJ zoekt Back2backer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Gitarist zoekt zanger", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Ik kan zingen!", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Wij zoeken een drummer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGERES GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "DJ zoekt Back2backer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Gitarist zoekt zanger", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Bassist GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Ik kan zingen!", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Wij zoeken een drummer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGERES GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "DJ zoekt Back2backer", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "Gitarist zoekt zanger", "3", "lorem ipsum lorem ipsum lorem ipsum"))
-        posts.add(Post(1, "ZANGER GEZOCHT", "3", "lorem ipsum lorem ipsum lorem ipsum"))
+    private fun addPostsToPosts() {
 
     }
 }
