@@ -15,5 +15,12 @@
     <string name="artist_hunt">Artist Hunt</string>
     <string name="action_sign_in">SIGN IN</string>
     <string name="action_forgot_password">Forgot Password?</string>
+    <string name="error_field_required">Required</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error">An error has occurred. Try Again</string>
+    <string name="not_same_password">Passwords don\'t match</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_search">Search</string>
 
 </resources>

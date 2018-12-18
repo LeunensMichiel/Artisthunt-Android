@@ -4,6 +4,10 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 object Model {
+    data class Message(
+        var data: String? = "none"
+    )
+
     @Entity(tableName = "user_table")
     data class User(
         var _id: String? = null,

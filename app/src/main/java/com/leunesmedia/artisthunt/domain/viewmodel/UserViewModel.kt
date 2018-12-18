@@ -1,17 +1,19 @@
 package com.leunesmedia.artisthunt.domain.viewmodel
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.persistence.API.UserApi
 import com.leunesmedia.artisthunt.persistence.local_db.repository.UserRespository
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class UserViewModel: InjectedViewModel() {
-    var rawUser = MutableLiveData<Model.User>()
-    var dbUser: LiveData<Model.User> = userRepo.user
+
+    var uiMessage = MutableLiveData<Model.Message>()
+
 
     @Inject
     lateinit var userApi: UserApi
@@ -20,5 +22,41 @@ class UserViewModel: InjectedViewModel() {
     lateinit var userRepo: UserRespository
 
     private lateinit var subscription: Disposable
+
+    fun login(loginDetails: Model.Login) {
+        subscription = userApi.login(loginDetails)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { user ->
+                    onRetrieveUserSucces(user)
+                    uiMessage.postValue(Model.Message("loginSucces"))
+                },
+                { error ->
+                    uiMessage.postValue(Model.Message("loginError"))
+                }
+            )
+    }
+
+    fun register(registerDetails: Model.Register){
+        subscription = userApi.register(registerDetails)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { user ->
+                    onRetrieveUserSucces(user)
+                    uiMessage.postValue(Model.Message("registerSucces"))
+                },
+                { error ->
+                    uiMessage.postValue(Model.Message("registerError"))
+                }
+            )
+    }
+
+    private fun onRetrieveUserSucces(user: Model.User?) {
+//        var pref = context.getSharedPreferences("userDetails", Context.MODE_PRIVATE)
+//        pref.edit().putString("authToken", user?.token).apply()
+        userRepo.insert(user!!)
+    }
 
 }
