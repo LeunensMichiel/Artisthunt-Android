@@ -13,15 +13,19 @@ object Model {
         var token: String?,
         var profile_image_filename: String? = null
     ) {
-        constructor() : this(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        )
         @PrimaryKey(autoGenerate = true)
         var db_id: Int = 0
     }
+
+    data class Login(
+        val email: String,
+        val password: String
+    )
+
+    data class Register(
+        val email: String,
+        val password: String,
+        val firstname: String,
+        val lastname: String
+    )
 }
