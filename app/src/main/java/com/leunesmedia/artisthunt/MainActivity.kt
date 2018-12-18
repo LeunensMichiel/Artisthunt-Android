@@ -1,6 +1,7 @@
 package com.leunesmedia.artisthunt
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -25,10 +26,10 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_home -> {
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_addPost -> {
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_addPost -> {
+            R.id.navigation_profile -> {
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -40,8 +41,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(main_toolbar)
+        supportActionBar!!.elevation = 0F
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.visibility = View.GONE
+
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
         userViewModel.userRepo.user.observe(this, Observer<Model.User?> {
             if (it == null) {
@@ -55,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 showActionBar(true)
                 navigation.visibility = View.VISIBLE
-
                 for (fragment in supportFragmentManager.fragments) {
                     supportFragmentManager.beginTransaction().remove(fragment).commit()
                 }
@@ -95,7 +99,6 @@ class MainActivity : AppCompatActivity() {
     private fun showActionBar(bool: Boolean) {
         if (bool) {
             this.supportActionBar?.show()
-            this.supportActionBar?.elevation = 0F
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 //                window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
