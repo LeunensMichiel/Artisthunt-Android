@@ -1,13 +1,159 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.leunesmedia.artisthunt.user.LoginFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.leunesmedia.artisthunt.user.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_height="match_parent" android:src="@drawable/loginbackground"
+            android:id="@+id/imageView3" android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:tint="#7d212121"
+    />
 
-</FrameLayout>
+    <!-- Login progress -->
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true"
+                android:layout_alignParentStart="true" android:layout_alignParentTop="true">
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:src="@mipmap/ic_launcher_round" android:id="@+id/artisthuntlogo"
+                       android:layout_marginTop="16dp"
+                       app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                       android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                       android:layout_marginStart="8dp" android:scaleType="centerCrop" android:adjustViewBounds="true"
+            />
+            <TextView
+                    android:text="@string/artist_hunt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:textSize="30sp" android:textAlignment="center"
+                    android:textAllCaps="true" android:id="@+id/loginTitel"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintTop_toBottomOf="@+id/artisthuntlogo"/>
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ems="10"
+                    android:id="@+id/loginEmail" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:padding="20dp"
+                    app:backgroundTint="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textColorHint="@color/colorSecondary"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:layout_marginStart="32dp" android:layout_marginEnd="32dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/loginTitel"/>
+
+
+            <EditText
+
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/login_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:imeActionLabel="SIGN IN"
+                    android:imeOptions="actionUnspecified"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:layout_constraintTop_toBottomOf="@+id/loginEmail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0" android:padding="20dp"
+                    app:backgroundTint="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textColorHint="@color/colorSecondary"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:layout_marginStart="32dp" android:layout_marginEnd="32dp"/>
+
+            <Button
+                    android:id="@+id/email_sign_in_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_sign_in"
+                    android:textStyle="bold"
+                    android:padding="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/login_password"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    app:layout_constraintEnd_toStartOf="@+id/Progress_login" android:layout_marginEnd="32dp"
+                    app:layout_constraintHorizontal_bias="0.0"/>
+
+            <ProgressBar
+                    android:id="@+id/Progress_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
+                    app:layout_constraintTop_toTopOf="@+id/email_sign_in_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/email_sign_in_button"/>
+
+            <Button
+                    android:text="@string/action_forgot_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_login_forgotbtn" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="32dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" android:padding="20dp"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintBottom_toTopOf="@+id/login_form_register_btn"
+                    app:layout_constraintVertical_bias="0.0" android:layout_marginBottom="32dp"
+                    android:layout_marginTop="8dp"/>
+            <Button
+                    android:id="@+id/login_form_register_btn"
+                    android:onClick="toRegister"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_register"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="20dp" app:layout_constraintBottom_toTopOf="@+id/info_linearlayout"
+                    android:layout_marginStart="32dp" android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.AppCompat.Button"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/info_linearlayout"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="16dp">
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_logo_zonder_tekst"
+                        android:id="@+id/imageView2"
+                        android:tint="@color/colorSecondary"
+                        android:adjustViewBounds="true"/>
+                <TextView
+                        android:text="Leunes Media"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView4"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryText" android:textAllCaps="true"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

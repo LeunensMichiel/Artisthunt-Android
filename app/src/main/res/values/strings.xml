@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">Artist Hunt</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_addpost">Add Post</string>
+    <string name="title_profile">Profile</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_firstname">First Name</string>
+    <string name="prompt_lastname">Last Name</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_register">SIGN UP</string>
+    <string name="action_register_short">SIGN UP</string>
+    <string name="prompt_repeat_password">Repeat Password</string>
+    <string name="action_already_account">I have an account</string>
+    <string name="leunes_media">Leunes Media</string>
+    <string name="artist_hunt">Artist Hunt</string>
+    <string name="action_sign_in">SIGN IN</string>
+    <string name="action_forgot_password">Forgot Password?</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
