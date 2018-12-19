@@ -81,7 +81,6 @@ class LoginFragment : Fragment() {
             login_password.error = getString(R.string.error_field_required)
             focusView = login_password
             cancel = true
-
         }
         // Check for a valid email address.
         if (TextUtils.isEmpty(loginEmail.text.toString())) {
@@ -108,8 +107,8 @@ class LoginFragment : Fragment() {
      * @param loginDetails we give a unique model that has a password and email so the backend can convert it to JSON
      */
     private fun doLogin(loginDetails: Model.Login) {
-        userViewModel.login(loginDetails)
         Progress_login.visibility = View.VISIBLE
+        userViewModel.login(loginDetails)
     }
 
     /**

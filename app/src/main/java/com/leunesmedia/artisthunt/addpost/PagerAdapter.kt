@@ -3,6 +3,7 @@ package com.leunesmedia.artisthunt.addpost
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.leunesmedia.artisthunt.domain.PostType
 
 class PagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
@@ -21,10 +22,10 @@ class PagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Image"
-            2 -> "Music"
+            0 -> PostType.IMAGE.toString()
+            2 -> PostType.AUDIO.toString()
             else -> {
-                "Text"
+                PostType.TEXT.toString()
             }
         }
     }

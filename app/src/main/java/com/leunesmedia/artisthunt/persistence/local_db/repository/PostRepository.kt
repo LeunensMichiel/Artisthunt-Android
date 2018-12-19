@@ -8,7 +8,6 @@ import org.jetbrains.anko.doAsync
 
 class PostRepository(private val dao: PostDao) {
     var post: LiveData<Model.Post> = dao.getPost()
-    var posts: LiveData<Model.Post> = dao.getPosts()
 
     @WorkerThread
     fun insert(post: Model.Post) {
@@ -18,14 +17,14 @@ class PostRepository(private val dao: PostDao) {
     }
 
     @WorkerThread
-    fun nukeUsers() {
+    fun nukePosts() {
         doAsync {
             dao.nukePosts()
         }
     }
 
     @WorkerThread
-    fun updateUser(post: Model.Post) {
+    fun updatePost(post: Model.Post) {
         doAsync {
             dao.updatePost(post)
         }

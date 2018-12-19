@@ -136,8 +136,8 @@ class RegisterFragment : Fragment() {
     }
 
     private fun toRegister(registerDetails: Model.Register) {
-        userViewModel.register(registerDetails)
         Progress_register.visibility = View.VISIBLE
+        userViewModel.register(registerDetails)
     }
 
     /**

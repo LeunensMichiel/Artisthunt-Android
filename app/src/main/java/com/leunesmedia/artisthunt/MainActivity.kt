@@ -13,6 +13,7 @@ import com.leunesmedia.artisthunt.addpost.AddPostFragment
 import com.leunesmedia.artisthunt.authentication.LoginFragment
 import com.leunesmedia.artisthunt.authentication.RegisterFragment
 import com.leunesmedia.artisthunt.domain.Model
+import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import com.leunesmedia.artisthunt.posts.PostsFragment
 import com.leunesmedia.artisthunt.profile.ProfileFragment
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsFragment: SettingsFragment
 
     private lateinit var userViewModel: UserViewModel
+    private lateinit var postViewModel: PostViewModel
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         navigation.visibility = View.GONE
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        postViewModel = ViewModelProviders.of(this).get(PostViewModel::class.java)
 
         userViewModel.userRepo.user.observe(this, Observer<Model.User?> {
             if (it == null) {
@@ -173,5 +176,9 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_activity_frame, loginFragment)
             .commit()
+    }
+
+    fun popStack() {
+        supportFragmentManager.popBackStack()
     }
 }

@@ -7,11 +7,8 @@ import com.leunesmedia.artisthunt.domain.Model
 @Dao
 interface PostDao
 {
-    @Query("SELECT * from post_table ORDER BY _id LIMIT 1")
-    fun getPost(): LiveData<Model.Post>
-
     @Query("SELECT * from post_table ORDER BY _id")
-    fun getPosts(): LiveData<Model.Post>
+    fun getPost(): LiveData<Model.Post>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(post: Model.Post)
