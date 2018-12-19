@@ -11,7 +11,7 @@ interface PostDao
     fun getPost(): LiveData<Model.Post>
 
     @Query("SELECT * from post_table ORDER BY _id")
-    fun getPosts(): LiveData<ArrayList<Model.Post>>
+    fun getPosts(): LiveData<Model.Post>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(post: Model.Post)

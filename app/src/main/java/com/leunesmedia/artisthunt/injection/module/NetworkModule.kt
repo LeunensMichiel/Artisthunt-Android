@@ -2,6 +2,7 @@ package com.leunesmedia.artisthunt.injection.module
 
 import android.content.Context
 import com.leunesmedia.artisthunt.injection.AuthenticationInterceptor
+import com.leunesmedia.artisthunt.persistence.API.PostApi
 import com.leunesmedia.artisthunt.persistence.API.UserApi
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,11 @@ class NetworkModule {
     @Provides
     internal fun provideUserApi(retrofit: Retrofit) : UserApi {
         return retrofit.create(UserApi::class.java)
+    }
+
+    @Provides
+    internal fun providePostApi(retrofit: Retrofit) : PostApi {
+        return retrofit.create(PostApi::class.java)
     }
 
     @Provides
