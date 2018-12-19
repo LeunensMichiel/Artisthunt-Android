@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
+import com.leunesmedia.artisthunt.post.AddPostFragment
 import com.leunesmedia.artisthunt.user.LoginFragment
 import com.leunesmedia.artisthunt.user.RegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var loginFragment: LoginFragment
     private lateinit var registerFragment: RegisterFragment
+    private lateinit var addPostFragment: AddPostFragment
 
     private lateinit var userViewModel: UserViewModel
 
@@ -27,6 +29,10 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_addPost -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_frame, addPostFragment)
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
@@ -63,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 for (fragment in supportFragmentManager.fragments) {
                     supportFragmentManager.beginTransaction().remove(fragment).commit()
                 }
+                addPostFragment = AddPostFragment()
             }
 
 
