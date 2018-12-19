@@ -1,4 +1,4 @@
-package com.leunesmedia.artisthunt.post
+package com.leunesmedia.artisthunt.addpost
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

@@ -9,33 +9,47 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.leunesmedia.artisthunt.addpost.AddPostFragment
+import com.leunesmedia.artisthunt.authentication.LoginFragment
+import com.leunesmedia.artisthunt.authentication.RegisterFragment
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
-import com.leunesmedia.artisthunt.post.AddPostFragment
-import com.leunesmedia.artisthunt.user.LoginFragment
-import com.leunesmedia.artisthunt.user.RegisterFragment
+import com.leunesmedia.artisthunt.posts.PostsFragment
+import com.leunesmedia.artisthunt.profile.ProfileFragment
+import com.leunesmedia.artisthunt.settings.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var loginFragment: LoginFragment
     private lateinit var registerFragment: RegisterFragment
+    private lateinit var postFragment: PostsFragment
     private lateinit var addPostFragment: AddPostFragment
+    private lateinit var profileFragment: ProfileFragment
+    private lateinit var settingsFragment: SettingsFragment
 
     private lateinit var userViewModel: UserViewModel
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_frame, postFragment, "post")
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_addPost -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity_frame, addPostFragment)
+                    .replace(R.id.main_activity_frame, addPostFragment, "addpost")
                     .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_frame, profileFragment, "profile")
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -59,27 +73,31 @@ class MainActivity : AppCompatActivity() {
                 navigation.visibility = View.GONE
                 loginFragment = LoginFragment()
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity_frame, loginFragment)
+                    .replace(R.id.main_activity_frame, loginFragment, "login")
                     .commit()
                 showActionBar(false)
 
             } else {
                 showActionBar(true)
                 navigation.visibility = View.VISIBLE
-                for (fragment in supportFragmentManager.fragments) {
-                    supportFragmentManager.beginTransaction().remove(fragment).commit()
-                }
+
+                postFragment = PostsFragment()
                 addPostFragment = AddPostFragment()
+                profileFragment = ProfileFragment()
+                settingsFragment = SettingsFragment()
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_frame, postFragment, "post")
+                    .addToBackStack(null)
+                    .commit()
             }
-
-
         })
     }
 
     fun toLogin(v: View) {
         loginFragment = LoginFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_activity_frame, loginFragment)
+            .replace(R.id.main_activity_frame, loginFragment, "login")
             .commit()
     }
 
@@ -89,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     fun toRegister(v: View) {
         registerFragment = RegisterFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_activity_frame, registerFragment)
+            .replace(R.id.main_activity_frame, registerFragment, "register")
             .commit()
     }
 
@@ -131,6 +149,12 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_logoutBtn -> {
                 logout()
                 return true
+            }
+            R.id.menu_settingsBtn -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_frame, settingsFragment, "settings")
+                    .addToBackStack(null)
+                    .commit()
             }
         }
         return super.onOptionsItemSelected(item)

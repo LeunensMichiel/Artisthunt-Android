@@ -1,4 +1,4 @@
-package com.leunesmedia.artisthunt.user
+package com.leunesmedia.artisthunt.authentication
 
 
 import android.arch.lifecycle.Observer
