@@ -5,11 +5,13 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.leunesmedia.artisthunt.domain.Model
+import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import com.leunesmedia.artisthunt.persistence.local_db.dao.UserDao
 
-@Database(entities = [Model.User::class], version = 1)
+@Database(entities = [Model.User::class, Model.Post::class], version = 2)
 abstract class LocalDatabase : RoomDatabase(){
     abstract fun userDao(): UserDao
+    abstract fun postDao(): PostDao
 
     companion object {
         @Volatile
