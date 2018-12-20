@@ -10,10 +10,10 @@ interface PostDao
     @Query("SELECT * from post_table WHERE _id = :postID ORDER BY _id LIMIT 1")
     fun getPost(postID: String): LiveData<Model.Post>
 
-    @Query("SELECT * from post_table WHERE user_id = :userID ORDER BY _id")
-    fun getUserPosts(userID: String): LiveData<Model.Post>
+    @Query("SELECT * from post_table WHERE user_id = :userID ORDER BY date")
+    fun getUserPosts(userID: String): LiveData<List<Model.Post>>
 
-    @Query("SELECT * from post_table ORDER BY _id ASC")
+    @Query("SELECT * from post_table ORDER BY _id")
     fun getAllPosts(): LiveData<List<Model.Post>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

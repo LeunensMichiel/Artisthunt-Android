@@ -1,6 +1,7 @@
 package com.leunesmedia.artisthunt.domain.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.persistence.API.PostApi
@@ -13,6 +14,8 @@ import javax.inject.Inject
 
 class PostViewModel : InjectedViewModel() {
     var uiMessage = MutableLiveData<Model.Message>()
+    var userPosts = MutableLiveData<Array<Model.Post>>()
+
     private lateinit var subscription: Disposable
 
     @Inject
@@ -60,12 +63,16 @@ class PostViewModel : InjectedViewModel() {
             .subscribe(
                 { result ->
                     result.forEach {
-                        postRepo.insert(it)
+                        if (!postRepo.allPosts.value?.contains(it)!!) {
+                            postRepo.insert(it)
+                        }
                     }
+                    userPosts.postValue(result)
                     uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
-
+                    Log.d("Bla", result.toString())
                 },
                 { error ->
+                    Log.d("Bla", error.message.toString())
                     uiMessage.postValue(Model.Message("retrieveUserPostsError"))
                 }
             )

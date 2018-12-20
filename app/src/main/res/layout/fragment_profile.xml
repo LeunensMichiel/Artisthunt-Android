@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".profile.ProfileFragment">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             tools:context=".profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="profileFragment"/>
+    <LinearLayout
+            android:id="@+id/profileFragment_profileLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="75dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profileFragment_profilepic"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/person_icon"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@color/colorSecondary"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="8dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:cropToPadding="false" android:scaleType="centerCrop"/>
+
+        <TextView
+                android:id="@+id/profileFragment_profilename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryText"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profileFragment_profileLinearLayout"
+            app:layout_constraintLeft_toLeftOf="@id/profileFragment_profileLinearLayout"
+            app:layout_constraintRight_toRightOf="@id/profileFragment_profileLinearLayout" />
+
+    <android.support.v7.widget.CardView
+            android:id="@+id/profileFragment_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            android:padding="0dp"
+            app:cardCornerRadius="15dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:padding="15dp">
+
+            <LinearLayout
+                    android:id="@+id/profileFragment_favGenre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/infoFavGenre"
+                />
+
+                <TextView
+                        android:id="@+id/profileFragment_favGenreText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary" android:textAlignment="textStart"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/profileFragment_favArtist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_favArtist"
+                />
+
+                <TextView
+                        android:id="@+id/profileFragment_favArtistText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary" android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/profileFragment_favInstrument"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/infoFavInstrument"
+                />
+
+                <TextView
+                        android:id="@+id/profileFragment_favInstrumentText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary" android:textAlignment="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView android:layout_width="0dp"
+                                            android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            android:layout_marginTop="8dp"
+                                            app:layout_constraintTop_toBottomOf="@+id/profileFragment_card"
+                                            android:id="@+id/rv_userPosts">
+
+    </android.support.v7.widget.RecyclerView>
+
+</android.support.constraint.ConstraintLayout>

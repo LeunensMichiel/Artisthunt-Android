@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                     .putString(getString(R.string.userIdKey), userViewModel.userRepo.user.value?._id)
                     .apply()
                 showActionBar(true)
+                postViewModel.postRepo.nukePosts()
                 navigation.visibility = View.VISIBLE
                 postFragment = PostsFragment()
                 addPostFragment = AddPostFragment()

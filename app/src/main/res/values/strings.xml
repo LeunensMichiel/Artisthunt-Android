@@ -28,5 +28,8 @@
     <string name="prompt_title">Title</string>
     <string name="prompt_description">Description</string>
     <string name="button_post">POST</string>
+    <string name="info_favArtist">Favourite Artist</string>
+    <string name="infoFavGenre">Genre</string>
+    <string name="infoFavInstrument">Instrument</string>
 
 </resources>

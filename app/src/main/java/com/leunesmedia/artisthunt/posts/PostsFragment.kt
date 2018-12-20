@@ -38,7 +38,11 @@ class PostsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postViewModel.retrieveAllPosts()
+        postViewModel.postRepo.allPosts.observe(this, Observer {
+            if (it.isNullOrEmpty()){
+                postViewModel.retrieveAllPosts()
+            }
+        })
 
         postViewModel.uiMessage.observe(this, Observer {
             when (it!!.data) {

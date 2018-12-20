@@ -9,17 +9,11 @@ import org.jetbrains.anko.doAsync
 class PostRepository(private val dao: PostDao) {
     var allPosts: LiveData<List<Model.Post>> = dao.getAllPosts()
 
-    @WorkerThread
-    fun getSinglePost(postid: String) {
-        doAsync {
-            dao.getPost(postid)
-        }
+    fun getSinglePost(postid: String) : LiveData<Model.Post> {
+           return dao.getPost(postid)
     }
-    @WorkerThread
-    fun getUserPosts(userid: String) {
-        doAsync {
-            dao.getUserPosts(userid)
-        }
+    fun getUserPosts(userid: String) : LiveData<List<Model.Post>> {
+           return dao.getUserPosts(userid)
     }
 
     @WorkerThread
