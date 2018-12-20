@@ -1,9 +1,11 @@
 package com.leunesmedia.artisthunt.injection.module
 
 import android.content.Context
+import com.leunesmedia.artisthunt.R
 import com.leunesmedia.artisthunt.injection.AuthenticationInterceptor
 import com.leunesmedia.artisthunt.persistence.API.PostApi
 import com.leunesmedia.artisthunt.persistence.API.UserApi
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -18,21 +20,24 @@ class NetworkModule {
     val API_BASE_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001"
 
     @Provides
-    internal fun provideUserApi(retrofit: Retrofit) : UserApi {
+    internal fun provideUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
     }
 
     @Provides
-    internal fun providePostApi(retrofit: Retrofit) : PostApi {
+    internal fun providePostApi(retrofit: Retrofit): PostApi {
         return retrofit.create(PostApi::class.java)
     }
 
     @Provides
     internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
+        val dateadapter = Moshi.Builder()
+            .add(DateAdapter())
+            .build()
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(dateadapter))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
     }
@@ -58,8 +63,8 @@ class NetworkModule {
     @Provides
     internal fun getAuthToken(context: Context): String {
         return context
-            .getSharedPreferences("userDetails", Context.MODE_PRIVATE)
-            .getString("authToken", "none")!!
+            .getSharedPreferences(context.getString(R.string.sharedPreferenceUserDetailsKey), Context.MODE_PRIVATE)
+            .getString(context.getString(R.string.authTokenKey), "none")!!
     }
 
 }

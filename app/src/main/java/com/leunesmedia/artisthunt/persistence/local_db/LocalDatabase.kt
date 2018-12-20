@@ -11,7 +11,7 @@ import com.leunesmedia.artisthunt.persistence.local_db.converters.StringArrayLis
 import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import com.leunesmedia.artisthunt.persistence.local_db.dao.UserDao
 
-@Database(entities = [Model.User::class, Model.Post::class], version = 2)
+@Database(entities = [Model.User::class, Model.Post::class], version = 3)
 @TypeConverters(StringArrayListConverter::class, DateTypeConverter::class)
 abstract class LocalDatabase : RoomDatabase(){
     abstract fun userDao(): UserDao

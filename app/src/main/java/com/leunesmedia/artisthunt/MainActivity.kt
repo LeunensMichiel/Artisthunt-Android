@@ -81,9 +81,15 @@ class MainActivity : AppCompatActivity() {
                 showActionBar(false)
 
             } else {
+                getSharedPreferences(
+                    getString(R.string.sharedPreferenceUserDetailsKey),
+                    Context.MODE_PRIVATE
+                ).edit()
+                    .putString(getString(R.string.authTokenKey), userViewModel.userRepo.user.value?.token)
+                    .putString(getString(R.string.userIdKey), userViewModel.userRepo.user.value?._id)
+                    .apply()
                 showActionBar(true)
                 navigation.visibility = View.VISIBLE
-
                 postFragment = PostsFragment()
                 addPostFragment = AddPostFragment()
                 profileFragment = ProfileFragment()

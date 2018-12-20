@@ -14,7 +14,7 @@ class StringArrayListConverter {
     }
 
     @TypeConverter
-    fun fromArrayLisr(list: ArrayList<String>): String {
+    fun fromArrayList(list: ArrayList<String>): String {
         val gson = Gson()
         return gson.toJson(list)
     }

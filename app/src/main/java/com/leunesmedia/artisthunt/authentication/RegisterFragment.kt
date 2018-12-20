@@ -2,7 +2,6 @@ package com.leunesmedia.artisthunt.authentication
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -42,13 +41,6 @@ class RegisterFragment : Fragment() {
                 "registerSucces" -> {
                     Progress_register.visibility = View.GONE
                     it.data = "Signed up"
-                    activity!!.getSharedPreferences(
-                        getString(R.string.sharedPreferenceUserDetailsKey),
-                        Context.MODE_PRIVATE
-                    ).edit()
-                        .putString(getString(R.string.authTokenKey), userViewModel.userRepo.user.value?.token)
-                        .putString(getString(R.string.userIdKey), userViewModel.userRepo.user.value?._id)
-                        .apply()
                     Toast.makeText(activity as MainActivity, it.data, Toast.LENGTH_SHORT).show()
                 }
                 "registerError" -> {

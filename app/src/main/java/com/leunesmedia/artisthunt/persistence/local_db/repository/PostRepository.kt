@@ -7,7 +7,20 @@ import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import org.jetbrains.anko.doAsync
 
 class PostRepository(private val dao: PostDao) {
-    var post: LiveData<Model.Post> = dao.getPost()
+    var allPosts: LiveData<List<Model.Post>> = dao.getAllPosts()
+
+    @WorkerThread
+    fun getSinglePost(postid: String) {
+        doAsync {
+            dao.getPost(postid)
+        }
+    }
+    @WorkerThread
+    fun getUserPosts(userid: String) {
+        doAsync {
+            dao.getUserPosts(userid)
+        }
+    }
 
     @WorkerThread
     fun insert(post: Model.Post) {

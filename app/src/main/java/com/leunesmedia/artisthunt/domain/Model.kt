@@ -16,8 +16,7 @@ object Model {
         var lastname: String? = null,
         var email: String? = null,
         var token: String?,
-        var profile_image_filename: String? = null,
-        var post_ids: ArrayList<String> = arrayListOf()
+        var profile_image_filename: String? = null
         ) {
         @PrimaryKey(autoGenerate = true)
         var db_id: Int = 0
