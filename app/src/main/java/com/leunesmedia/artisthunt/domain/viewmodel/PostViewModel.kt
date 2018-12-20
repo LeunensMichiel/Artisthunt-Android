@@ -35,7 +35,9 @@ class PostViewModel : InjectedViewModel() {
             .subscribe(
                 { result ->
                     result.forEach {
-                        postRepo.insert(it)
+                        if (!postRepo.allPosts.value?.contains(it)!!) {
+                            postRepo.insert(it)
+                        }
                     }
                     uiMessage.postValue(Model.Message("retrieveAllPostsSucces"))
 

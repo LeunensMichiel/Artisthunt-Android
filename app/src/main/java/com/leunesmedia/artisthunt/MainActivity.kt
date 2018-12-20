@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
                 addPostFragment = AddPostFragment()
                 profileFragment = ProfileFragment()
                 settingsFragment = SettingsFragment()
-
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.main_activity_frame, postFragment, "post")
                     .addToBackStack(null)

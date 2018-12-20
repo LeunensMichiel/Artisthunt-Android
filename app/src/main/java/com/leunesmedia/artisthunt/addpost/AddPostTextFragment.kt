@@ -45,6 +45,8 @@ class AddPostTextFragment : Fragment() {
                 "addPostsSucces" -> {
                     progressBar_AddPostText.visibility = View.INVISIBLE
                     it.data = "Post Added!"
+                    addPostText_Title.text.clear()
+                    addPostText_description.text.clear()
                     (activity as MainActivity).popStack()
                     Toast.makeText(activity as MainActivity, it.data, Toast.LENGTH_SHORT).show()
                 }

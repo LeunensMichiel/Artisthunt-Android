@@ -13,7 +13,6 @@ import javax.inject.Inject
 class UserViewModel: InjectedViewModel() {
 
     var uiMessage = MutableLiveData<Model.Message>()
-    var dbUser = userRepo.user
 
     @Inject
     lateinit var userApi: UserApi
