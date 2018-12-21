@@ -66,13 +66,14 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.elevation = 0F
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.menu.findItem(R.id.navigation_home).isChecked = true
         navigation.visibility = View.GONE
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         postViewModel = ViewModelProviders.of(this).get(PostViewModel::class.java)
 
         userViewModel.userRepo.user.observe(this, Observer<Model.User?> {
-            if (it == null) {
+            if (it?.token == null) {
                 navigation.visibility = View.GONE
                 loginFragment = LoginFragment()
                 supportFragmentManager.beginTransaction()
@@ -170,14 +171,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        userViewModel.userRepo.nukeUsers()
         getSharedPreferences(getString(R.string.sharedPreferenceUserDetailsKey), Context.MODE_PRIVATE)
             .edit()
             .remove(getString(R.string.userIdKey))
             .remove(getString(R.string.authTokenKey))
             .apply()
+        userViewModel.userRepo.nukeUsers()
+
         navigation.visibility = View.GONE
         showActionBar(false)
+
         loginFragment = LoginFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_activity_frame, loginFragment)

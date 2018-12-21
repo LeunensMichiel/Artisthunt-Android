@@ -62,5 +62,10 @@ class PostsFragment : Fragment() {
             adapter = viewAdapter
             addItemDecoration(RV_PostDecorator(5))
         }
+
+        postRefresher.setOnRefreshListener {
+            postViewModel.retrieveAllPosts()
+            postRefresher.isRefreshing = false
+        }
     }
 }
