@@ -18,6 +18,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Module
 class NetworkModule {
     val API_BASE_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001"
+    val LOCAL_BASE_URL = "http://192.168.0.177:3000"
 
     @Provides
     internal fun provideUserApi(retrofit: Retrofit): UserApi {

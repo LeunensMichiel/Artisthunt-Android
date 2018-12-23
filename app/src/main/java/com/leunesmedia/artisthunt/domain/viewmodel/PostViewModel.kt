@@ -1,6 +1,7 @@
 package com.leunesmedia.artisthunt.domain.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import android.graphics.Bitmap
 import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
@@ -10,6 +11,10 @@ import com.leunesmedia.artisthunt.persistence.local_db.repository.UserRespositor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 class PostViewModel : InjectedViewModel() {
@@ -69,10 +74,8 @@ class PostViewModel : InjectedViewModel() {
                     }
                     userPosts.postValue(result)
                     uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
-                    Log.d("Bla", result.toString())
                 },
                 { error ->
-                    Log.d("Bla", error.message.toString())
                     uiMessage.postValue(Model.Message("retrieveUserPostsError"))
                 }
             )
@@ -94,5 +97,26 @@ class PostViewModel : InjectedViewModel() {
             )
     }
 
+    fun addImagePost(file: File, bitmap: Bitmap, post: Model.Post) {
+        val reqFile = RequestBody.create(
+            MediaType.parse("image/jpg"),
+            file
+        )
+        val body = MultipartBody.Part.createFormData("file", file.name + ".jpg", reqFile)
+        subscription = postApi.addImagePost(post, body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    post.post_image_filename = result.post_image_filename
+                    postRepo.insert(post)
+                    uiMessage.postValue(Model.Message("addPostImageSucces"))
+                },
+                { error ->
+                    Log.d("HIHI", error.message)
+                    uiMessage.postValue(Model.Message("addPostImageError"))
+                }
+            )
 
+    }
 }
