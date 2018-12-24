@@ -2,7 +2,6 @@ package com.leunesmedia.artisthunt.domain.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.graphics.Bitmap
-import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.persistence.API.PostApi
@@ -108,12 +107,10 @@ class PostViewModel : InjectedViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    post.post_image_filename = result.post_image_filename
-                    postRepo.insert(post)
+                    postRepo.insert(result)
                     uiMessage.postValue(Model.Message("addPostImageSucces"))
                 },
                 { error ->
-                    Log.d("HIHI", error.message)
                     uiMessage.postValue(Model.Message("addPostImageError"))
                 }
             )
