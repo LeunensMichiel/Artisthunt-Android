@@ -16,7 +16,7 @@ interface PostApi {
     fun addPost(@Body post: Model.Post): Observable<Model.Post>
 
     @Multipart
-    @POST("/API/post/post/image")
+    @PUT("/API/post/post/image")
     fun addImagePost(@Part("post") post: Model.Post, @Part file: MultipartBody.Part): Observable<Model.Post>
 
 }
