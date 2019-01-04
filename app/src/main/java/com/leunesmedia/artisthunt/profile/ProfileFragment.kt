@@ -1,25 +1,44 @@
 package com.leunesmedia.artisthunt.profile
 
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.leunesmedia.artisthunt.MainActivity
 import com.leunesmedia.artisthunt.R
 import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import com.leunesmedia.artisthunt.utils.RV_UserPostsDecorator
+import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.jetbrains.anko.imageBitmap
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 
 class ProfileFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
+    private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +59,47 @@ class ProfileFragment : Fragment() {
 
         userViewModel.userRepo.user.observe(this, Observer {
             postViewModel.retrieveUserPosts()
-            profileFragment_profilename.text = "${userViewModel.userRepo.user.value?.firstname} ${userViewModel.userRepo.user.value?.lastname}"
+            profileFragment_profilename.text =
+                    "${userViewModel.userRepo.user.value?.firstname} ${userViewModel.userRepo.user.value?.lastname}"
             profileFragment_favGenreText.text = "Punk Rock"
             profileFragment_favArtistText.text = "Foo Fighters"
             profileFragment_favInstrumentText.text = "Guitar"
+            profileFragment_profilepic.setColorFilter(Color.argb(0, 255, 255, 255))
+
+            if (it!!.profile_image_filename != null) {
+                Picasso.get().load(SERVER_IMG_URL + userViewModel.userRepo.user.value?.profile_image_filename!!).into(profileFragment_profilepic)
+            }
         })
+
+        profileFragment_profilepic.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+                    )
+                }
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1
+                    )
+                } else {
+                    selectImage()
+                }
+            } else {
+                selectImage()
+            }
+
+        }
 
         val viewManager = GridLayoutManager((activity as MainActivity), 3)
         val viewAdapter = UserPostAdapter(this, postViewModel, userViewModel)
@@ -55,5 +110,36 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun selectImage() {
+        CropImage.activity()
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .setAspectRatio(1, 1)
+            .start(context!!, this)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val result: CropImage.ActivityResult = CropImage.getActivityResult(data)
+                val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, result.uri)
+
+                val file = File(context?.cacheDir, "temp")
+                val bos = ByteArrayOutputStream()
+                file.createNewFile()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+                val fos = FileOutputStream(file)
+
+                fos.write(bos.toByteArray())
+                fos.flush()
+                fos.close()
+
+                profileFragment_profilepic.imageBitmap = bitmap
+                profileFragment_profilepic.setColorFilter(Color.argb(50, 255, 255, 255))
+
+                userViewModel.changeProfilePicture(file, bitmap)
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Toast.makeText(activity as MainActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

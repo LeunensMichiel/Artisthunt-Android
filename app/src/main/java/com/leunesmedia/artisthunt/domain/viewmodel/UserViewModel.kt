@@ -1,6 +1,8 @@
 package com.leunesmedia.artisthunt.domain.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import android.graphics.Bitmap
+import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.persistence.API.UserApi
@@ -8,6 +10,10 @@ import com.leunesmedia.artisthunt.persistence.local_db.repository.UserRespositor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 class UserViewModel: InjectedViewModel() {
@@ -50,6 +56,29 @@ class UserViewModel: InjectedViewModel() {
                     uiMessage.postValue(Model.Message("registerError"))
                 }
             )
+    }
+
+    fun changeProfilePicture(file: File, bitmap: Bitmap) {
+        val reqFile = RequestBody.create(
+            MediaType.parse("image/jpg"),
+            file
+        )
+        val body = MultipartBody.Part.createFormData("file", file.name + ".jpg", reqFile)
+        subscription = userApi.updateUserProfilePicture(userRepo.user.value?._id!!, body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    userRepo.user.value?.profile_image_filename = result.data
+                    userRepo.updateUser(userRepo.user.value!!)
+                    uiMessage.postValue(Model.Message("updateProfileImageSucces"))
+                },
+                { error ->
+                    Log.d("HIHIHI", error.message)
+                    uiMessage.postValue(Model.Message("updateProfileImageError"))
+                }
+            )
+
     }
 
     private fun onRetrieveUserSucces(user: Model.User?) {

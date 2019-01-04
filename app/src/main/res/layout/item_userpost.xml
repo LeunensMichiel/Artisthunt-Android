@@ -15,10 +15,16 @@
                                                   app:layout_constraintTop_toTopOf="parent"
                                                   app:layout_constraintDimensionRatio="1"
     >
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/userpost_image"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
         <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
 
                   android:textColor="@color/colorPrimaryText" android:textSize="18sp"
-                  android:textStyle="bold" android:textAlignment="center" android:id="@+id/item_user_post_text"/>
+                  android:textAlignment="center" android:id="@+id/item_user_post_text" android:padding="5dp"/>
 
     </android.support.design.card.MaterialCardView>
 </android.support.constraint.ConstraintLayout>

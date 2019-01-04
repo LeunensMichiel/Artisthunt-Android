@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.leunesmedia.artisthunt.R
 import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_userpost.view.*
 
 class UserPostAdapter(
@@ -17,6 +19,9 @@ class UserPostAdapter(
     val postViewModel: PostViewModel,
     val userViewModel: UserViewModel
 ) : RecyclerView.Adapter<UserPostAdapter.UserPostViewHolder>() {
+
+    private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
+
 
     init {
         postViewModel.userPosts.observe(lifecycleOwner, Observer {
@@ -36,11 +41,19 @@ class UserPostAdapter(
     }
 
     override fun onBindViewHolder(p0: UserPostAdapter.UserPostViewHolder, p1: Int) {
-        p0.title.text = postViewModel.userPosts.value!![p1].title
+        if (postViewModel.userPosts.value?.get(p1)?.post_image_filename != null) {
+            p0.title.text = ""
+            Picasso.get().cancelRequest(p0.image)
+            Picasso.get().load(SERVER_IMG_URL + postViewModel.userPosts.value!![p1].post_image_filename).into(p0.image)
+        } else {
+            p0.image.setImageDrawable(null)
+            p0.title.text = postViewModel.userPosts.value!![p1].title
+        }
     }
 
     inner class UserPostViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val title: TextView = v.item_user_post_text
+        val image: ImageView = v.userpost_image
     }
 
 }
