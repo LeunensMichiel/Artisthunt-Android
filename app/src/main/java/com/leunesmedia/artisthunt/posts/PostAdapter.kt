@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.airbnb.lottie.LottieAnimationView
 import com.leunesmedia.artisthunt.R
 import com.leunesmedia.artisthunt.domain.PostType
 import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
@@ -48,6 +49,9 @@ class PostAdapter(
         p0.title.text = postViewModel.postRepo.allPosts.value!![p1].title
         p0.description.text = postViewModel.postRepo.allPosts.value!![p1].description
         p0.date.text = formatter.format( postViewModel.postRepo.allPosts.value!![p1].date)
+        p0.heart.setOnClickListener {
+            p0.heart.playAnimation()
+        }
         if (postViewModel.postRepo.allPosts.value!![p1].post_image_filename != null && postViewModel.postRepo.allPosts.value!![p1].type == PostType.IMAGE.toString()) {
             p0.image.visibility = View.VISIBLE
             Picasso.get().cancelRequest(p0.image)
@@ -64,6 +68,8 @@ class PostAdapter(
         val description: TextView = v.post_Description
         val date: TextView = v.post_Date
         val image: ImageView = v.post_image
+        val counter: TextView = v.post_likeCounter
+        val heart: LottieAnimationView = v.post_heart
     }
 
 }
