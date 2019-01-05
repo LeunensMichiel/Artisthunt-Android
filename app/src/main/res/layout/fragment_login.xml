@@ -76,6 +76,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
                     app:layout_constraintHorizontal_bias="0.0" android:padding="20dp"
+
                     app:backgroundTint="@color/colorPrimaryText"
                     android:textColor="@color/colorPrimaryText"
                     android:textColorHint="@color/colorSecondary"
