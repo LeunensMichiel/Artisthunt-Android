@@ -2,9 +2,10 @@ package com.leunesmedia.artisthunt.injection.module
 
 import android.content.Context
 import com.leunesmedia.artisthunt.R
-import com.leunesmedia.artisthunt.injection.AuthenticationInterceptor
-import com.leunesmedia.artisthunt.persistence.API.PostApi
-import com.leunesmedia.artisthunt.persistence.API.UserApi
+import com.leunesmedia.artisthunt.network.API.PostApi
+import com.leunesmedia.artisthunt.network.API.UserApi
+import com.leunesmedia.artisthunt.network.AuthenticationInterceptor
+import com.leunesmedia.artisthunt.network.DateAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,7 @@ class NetworkModule {
     internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
         val dateadapter = Moshi.Builder()
             .add(DateAdapter())
+
             .build()
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)

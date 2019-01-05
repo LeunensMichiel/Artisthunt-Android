@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
-import com.leunesmedia.artisthunt.persistence.API.UserApi
+import com.leunesmedia.artisthunt.network.API.UserApi
 import com.leunesmedia.artisthunt.persistence.local_db.repository.UserRespository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

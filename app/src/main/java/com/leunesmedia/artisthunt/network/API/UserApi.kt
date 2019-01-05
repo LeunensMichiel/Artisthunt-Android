@@ -1,4 +1,4 @@
-package com.leunesmedia.artisthunt.persistence.API
+package com.leunesmedia.artisthunt.network.API
 
 import com.leunesmedia.artisthunt.domain.Model
 import io.reactivex.Observable

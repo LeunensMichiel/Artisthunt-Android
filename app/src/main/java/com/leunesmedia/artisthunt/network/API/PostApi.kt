@@ -1,4 +1,4 @@
-package com.leunesmedia.artisthunt.persistence.API
+package com.leunesmedia.artisthunt.network.API
 
 import com.leunesmedia.artisthunt.domain.Model
 import io.reactivex.Observable
@@ -18,5 +18,8 @@ interface PostApi {
     @Multipart
     @PUT("/API/post/post/image")
     fun addImagePost(@Part("post") post: Model.Post, @Part file: MultipartBody.Part): Observable<Model.Post>
+
+    @POST("/API/post/post/{post_id}/updateLikers")
+    fun updatePostLikers(@Path("post_id") post_id: String, @Body post: Model.updateLiker): Observable<Model.updateLiker>
 
 }

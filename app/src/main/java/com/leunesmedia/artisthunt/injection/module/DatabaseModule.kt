@@ -2,7 +2,7 @@ package com.leunesmedia.artisthunt.injection.module
 
 import android.app.Application
 import android.content.Context
-import com.leunesmedia.artisthunt.persistence.local_db.LocalDatabase
+import com.leunesmedia.artisthunt.persistence.LocalDatabase
 import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import com.leunesmedia.artisthunt.persistence.local_db.dao.UserDao
 import com.leunesmedia.artisthunt.persistence.local_db.repository.PostRepository

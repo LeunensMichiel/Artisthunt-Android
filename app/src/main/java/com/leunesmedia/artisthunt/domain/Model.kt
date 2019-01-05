@@ -3,6 +3,7 @@ package com.leunesmedia.artisthunt.domain
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import java.util.*
+import kotlin.collections.ArrayList
 
 object Model {
     data class Message(
@@ -43,9 +44,14 @@ object Model {
         var user_id: String? = null,
         var post_image_filename: String? = null,
         var post_audio_filename: String? = null,
-        var date: Date? = null
-    ) {
+        var date: Date? = null,
+        var likers: MutableList<String> = ArrayList()
+        ) {
         @PrimaryKey(autoGenerate = true)
         var db_id: Int = 0
     }
+
+    data class updateLiker(
+        var liker : String
+    )
 }

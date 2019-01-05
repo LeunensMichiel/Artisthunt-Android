@@ -2,9 +2,10 @@ package com.leunesmedia.artisthunt.domain.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.graphics.Bitmap
+import android.util.Log
 import com.leunesmedia.artisthunt.domain.InjectedViewModel
 import com.leunesmedia.artisthunt.domain.Model
-import com.leunesmedia.artisthunt.persistence.API.PostApi
+import com.leunesmedia.artisthunt.network.API.PostApi
 import com.leunesmedia.artisthunt.persistence.local_db.repository.PostRepository
 import com.leunesmedia.artisthunt.persistence.local_db.repository.UserRespository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -116,4 +117,26 @@ class PostViewModel : InjectedViewModel() {
             )
 
     }
+
+    fun updateLikers(post : Model.Post, liker: Model.updateLiker) {
+        subscription = postApi.updatePostLikers(post._id!!, liker)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    if (post.likers.contains(liker.liker)) {
+                        post.likers.remove(liker.liker)
+                    } else {
+                        post.likers.add(liker.liker)
+                    }
+                    postRepo.updatePost(post)
+                    uiMessage.postValue(Model.Message("likesUpdated"))
+                },
+                { error ->
+                    Log.d("HIHIHI", error.message)
+                    uiMessage.postValue(Model.Message("likesUpdateError"))
+                }
+            )
+    }
+
 }

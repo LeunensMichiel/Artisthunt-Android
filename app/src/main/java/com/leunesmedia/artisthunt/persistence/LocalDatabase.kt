@@ -1,4 +1,4 @@
-package com.leunesmedia.artisthunt.persistence.local_db
+package com.leunesmedia.artisthunt.persistence
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
@@ -8,11 +8,12 @@ import android.content.Context
 import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.persistence.local_db.converters.DateTypeConverter
 import com.leunesmedia.artisthunt.persistence.local_db.converters.StringArrayListConverter
+import com.leunesmedia.artisthunt.persistence.local_db.converters.StringListConverter
 import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import com.leunesmedia.artisthunt.persistence.local_db.dao.UserDao
 
 @Database(entities = [Model.User::class, Model.Post::class], version = 3)
-@TypeConverters(StringArrayListConverter::class, DateTypeConverter::class)
+@TypeConverters(StringArrayListConverter::class, DateTypeConverter::class, StringListConverter::class)
 abstract class LocalDatabase : RoomDatabase(){
     abstract fun userDao(): UserDao
     abstract fun postDao(): PostDao
