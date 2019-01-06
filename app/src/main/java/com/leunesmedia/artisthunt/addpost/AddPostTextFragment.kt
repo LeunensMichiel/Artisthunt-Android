@@ -18,12 +18,18 @@ import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add_post_text.*
 import java.util.*
 
+/**
+ * Fragment that contains logic to add Post with just text
+ */
 class AddPostTextFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
     private var cancel = false
     private var focusView: View? = null
 
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +44,10 @@ class AddPostTextFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add_post_text, container, false)
     }
 
+    /**
+     * Adds clicklistener to addPostText_PostBtn so user can post post
+     * Observes uiMessage from postViewModel and updates UI accordingly
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         postViewModel.uiMessage.observe(this, android.arch.lifecycle.Observer {
@@ -84,6 +94,9 @@ class AddPostTextFragment : Fragment() {
         }
     }
 
+    /**
+     * Calls viewModel to add Post and makes adds a new post to the function
+     */
     private fun doPost() {
         progressBar_AddPostText.visibility = View.VISIBLE
         val post = Model.Post(

@@ -1,6 +1,7 @@
 package com.leunesmedia.artisthunt.profile
 
 
+import android.Manifest
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -33,13 +34,18 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Fragment that display's all the data of the User
+ */
 class ProfileFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
 
-
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +59,13 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-
+    /**
+     * Adds a LinearLayoutManager to rv_userposts and applies an adapter
+     * Observes uiMessage from userViewModel and updates UI accordingly
+     * Observes userPosts from the viewModel and calls the postViewModel to retrieve it from Server if Empty
+     * Sets an Empty Image to notify User if he does not have posts
+     * Adds Clicklistener to the CircularImageView API and opens the ImageCropper API to process Image Picking by user
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -80,42 +92,15 @@ class ProfileFragment : Fragment() {
                 Picasso.get()
                     .load(SERVER_IMG_URL + userViewModel.userRepo.user.value?.profile_image_filename!!)
                     .placeholder(R.drawable.person_icon)
-                    .resize(250, 250)
+                    .resize(200, 200)
                     .centerCrop()
                     .into(profileFragment_profilepic)
             }
         })
 
-        profileFragment_profilepic.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(
-                        activity as MainActivity,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        activity as MainActivity,
-                        arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
-                    )
-                }
-                if (ContextCompat.checkSelfPermission(
-                        activity as MainActivity,
-                        android.Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        activity as MainActivity,
-                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1
-                    )
-                } else {
-                    selectImage()
-                }
-            } else {
-                selectImage()
-            }
+        changeProfilePicture()
 
-        }
-
+        //Checks orientation and makes GridLayout have more items if Landscape
         var viewManager : RecyclerView.LayoutManager
         if ((activity as MainActivity).resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             viewManager = GridLayoutManager((activity as MainActivity), 3)
@@ -131,6 +116,38 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun changeProfilePicture() {
+        profileFragment_profilepic.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+                    )
+                }
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1
+                    )
+                } else {
+                    selectImage()
+                }
+            } else {
+                selectImage()
+            }
+
+        }
+    }
+
     private fun selectImage() {
         CropImage.activity()
             .setGuidelines(CropImageView.Guidelines.ON)
@@ -138,6 +155,9 @@ class ProfileFragment : Fragment() {
             .start(context!!, this)
     }
 
+    /**
+     * Uses the result from ImageCropper, makes a file out of it and calls userViewModel to update with the (file)
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -154,7 +174,7 @@ class ProfileFragment : Fragment() {
                 fos.flush()
                 fos.close()
 
-                userViewModel.changeProfilePicture(file, bitmap)
+                userViewModel.changeProfilePicture(file)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(activity as MainActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
             }

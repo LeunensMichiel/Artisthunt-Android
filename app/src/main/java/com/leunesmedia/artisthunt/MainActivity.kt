@@ -23,6 +23,9 @@ import com.leunesmedia.artisthunt.profile.ProfileFragment
 import com.leunesmedia.artisthunt.settings.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * The Main Activity. Everything from the app is routed through here
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var loginFragment: LoginFragment
     private lateinit var registerFragment: RegisterFragment
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
 
+    /**
+     * Listener that checks which fragment should be displayed when clicking on a BottomNavigationBarItem
+     */
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -61,6 +67,15 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    /**
+     * Sets Theme to artisttheme
+     * Sets Colour of the Status Bar to colorPrimary
+     * Sets custom Toolbar and sets elevation off
+     *
+     * Initialises Navigation with its listener and sets default Item to Home
+     * Initialises ViewModels
+     * calls (isLoggedIn)
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.artist)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -81,6 +96,17 @@ class MainActivity : AppCompatActivity() {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         postViewModel = ViewModelProviders.of(this).get(PostViewModel::class.java)
 
+        isLoggedIn()
+    }
+
+    /**
+     * Observers the User in the UserViewModel's Repo.
+     * If Token is null The LoginFragment will be shown,
+     * Otherwise all other fragments are loaded into view and PostsFragment is shown, token is retrieved
+     *
+     * Also checks if Statusbar has to be displayed
+     */
+    private fun isLoggedIn() {
         userViewModel.userRepo.user.observe(this, Observer<Model.User?> {
             if (it?.token == null) {
                 navigation.visibility = View.GONE
@@ -112,6 +138,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Anko Method to delegate User to LoginScreen
+     */
     fun toLogin(v: View) {
         loginFragment = LoginFragment()
         supportFragmentManager.beginTransaction()
@@ -120,7 +149,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * This function replaces the login fragment with the register fragment
+     * Anko Method to delegate User to RegisterScreen
      */
     fun toRegister(v: View) {
         registerFragment = RegisterFragment()
@@ -130,7 +159,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * This function replaces the login fragment with the forgotPassword fragment
+     * Anko function replaces the login fragment with the forgotPassword fragment
      */
 //    fun toForgot(v : View) {
 //        forgotPasswordFragment = ForgotPasswordFragment()
@@ -152,6 +181,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    /**
+     * If User clicks Logout, (logout) is called
+     * If User Clicks settings, Settings fragment replaces current fragment
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_logoutBtn -> {
@@ -168,6 +201,10 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Clears Sharedpreferences, Deletes User from Room Database
+     * Hides Navigation, Toolbar and redirects to Login
+     */
     private fun logout() {
         getSharedPreferences(getString(R.string.sharedPreferenceUserDetailsKey), Context.MODE_PRIVATE)
             .edit()
@@ -185,6 +222,9 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    /**
+     * Function that fragments can call to remove themselves
+     */
     fun popStack() {
         supportFragmentManager.popBackStack()
     }

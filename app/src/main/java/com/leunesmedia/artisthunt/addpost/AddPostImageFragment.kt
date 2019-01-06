@@ -33,8 +33,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
+/**
+ * Fragment that contains the logic to add a post with an Image
+ */
 class AddPostImageFragment : Fragment() {
-
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
     private var imageFile: File? = null
@@ -42,6 +44,9 @@ class AddPostImageFragment : Fragment() {
     private var cancel = false
     private var focusView: View? = null
 
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,10 +57,16 @@ class AddPostImageFragment : Fragment() {
         postViewModel = activity?.run {
             ViewModelProviders.of(this).get(PostViewModel::class.java)
         } ?: throw Exception("Invalid activity")
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_post_image, container, false)
     }
 
+    /**
+     * Adds clicklisteners to addPostImageView so user can select an image with ImageCropper API
+     * Adds clicklistener to addPostImage_PostBtn so user can post post
+     * Observes uiMessage from postViewModel and updates UI accordingly
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         postViewModel.uiMessage.observe(this, android.arch.lifecycle.Observer {
@@ -87,7 +98,6 @@ class AddPostImageFragment : Fragment() {
     }
 
     private fun initImageUpload() {
-
         addPostImage_Image.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(
@@ -99,6 +109,8 @@ class AddPostImageFragment : Fragment() {
                         activity as MainActivity,
                         arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
                     )
+                } else {
+                    selectImage()
                 }
                 if (ContextCompat.checkSelfPermission(
                         activity as MainActivity,
@@ -126,6 +138,9 @@ class AddPostImageFragment : Fragment() {
             .start(context!!, this)
     }
 
+    /**
+     * Result of imagecropper is converted into a file and addPostImage gets the bitmap
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -173,6 +188,10 @@ class AddPostImageFragment : Fragment() {
         }
     }
 
+    /**
+     * Checks if image is null or not and calls the corresponding function from postviewmodel
+     * to add a post and adds a post to the function
+     */
     private fun doPost() {
         progressBar_AddPostImage.visibility = View.VISIBLE
         if (image == null || imageFile == null) {

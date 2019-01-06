@@ -18,11 +18,17 @@ import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
+/**
+ * Fragment containing the logic to log the user in
+ */
 class LoginFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
     private var cancel = false
     private var focusView: View? = null
 
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +40,10 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    /**
+     * Adds clicklistener to the SignInButton which will try to log the user in
+     * Observes the userviewmodel's UIMessage to update UI accordingly
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userViewModel.uiMessage.observe(this, Observer {
@@ -64,6 +74,9 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /**
+     * Checks the EditText requirements
+     */
     private fun attemptLogin() {
         // Reset errors.
         loginEmail.error = null
@@ -113,7 +126,6 @@ class LoginFragment : Fragment() {
      * @param email is the email that will be checked
      */
     private fun isEmailValid(email: String): Boolean {
-        //TODO: Replace this with your own logic
         return email.contains("@")
     }
 }

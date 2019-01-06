@@ -5,11 +5,20 @@ import android.arch.persistence.room.PrimaryKey
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * Contains all the Models for the app
+ */
 object Model {
+    /**
+     * Model to retrieve a message from the server
+     */
     data class Message(
         var data: String? = "none"
     )
 
+    /**
+     * Room Model for the User
+     */
     @Entity(tableName = "user_table")
     data class User(
         var _id: String? = null,
@@ -23,11 +32,16 @@ object Model {
         var db_id: Int = 0
     }
 
+    /**
+     * Model to do a login Post API call to the server
+     */
     data class Login(
         val email: String,
         val password: String
     )
-
+    /**
+     * Model to do a register Post API call to the server
+     */
     data class Register(
         val email: String,
         val password: String,
@@ -35,6 +49,9 @@ object Model {
         val lastname: String
     )
 
+    /**
+     * Room model for a post
+     */
     @Entity(tableName = "post_table")
     data class Post(
         var _id: String? = null,
@@ -51,6 +68,9 @@ object Model {
         var db_id: Int = 0
     }
 
+    /**
+     * Model to do a Put API call to the server so a post can get liked and unliked
+     */
     data class updateLiker(
         var liker : String
     )

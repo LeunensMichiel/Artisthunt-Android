@@ -11,7 +11,9 @@ import com.leunesmedia.artisthunt.persistence.local_db.converters.StringArrayLis
 import com.leunesmedia.artisthunt.persistence.local_db.converters.StringListConverter
 import com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao
 import com.leunesmedia.artisthunt.persistence.local_db.dao.UserDao
-
+/**
+ * Room Database Class
+ */
 @Database(entities = [Model.User::class, Model.Post::class], version = 3)
 @TypeConverters(StringArrayListConverter::class, DateTypeConverter::class, StringListConverter::class)
 abstract class LocalDatabase : RoomDatabase(){
@@ -22,7 +24,9 @@ abstract class LocalDatabase : RoomDatabase(){
         @Volatile
         private var INSTANCE: LocalDatabase? = null
         const val DATABASE_NAME = "artisthuntdb"
-
+        /**
+         * Returns LocalDatabase Room Object
+         */
         fun getDatabase(context: Context): LocalDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {

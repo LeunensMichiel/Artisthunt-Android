@@ -16,10 +16,16 @@ import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_posts.*
 
+/**
+ * Fragment that contains logic to display all Posts
+ */
 class PostsFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var postViewModel: PostViewModel
 
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +39,15 @@ class PostsFragment : Fragment() {
         } ?: throw Exception("Invalid activity")
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
-
+    /**
+     * Adds a LinearLayoutManager to rv_posts and applies an adapter
+     * Observes uiMessage from postViewModel and updates UI accordingly
+     * Observes allPosts from the Repository and calls the postViewModel to retrieve it from Server if Empty
+     * Creates RefreshListener
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         postViewModel.postRepo.allPosts.observe(this, Observer {
             if (it.isNullOrEmpty()){
                 postViewModel.retrieveAllPosts()

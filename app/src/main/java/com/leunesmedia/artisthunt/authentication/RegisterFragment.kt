@@ -17,11 +17,17 @@ import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
+/**
+ * Fragment that contains logic to register User
+ */
 class RegisterFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
     private var cancel = false
     private var focusView: View? = null
 
+    /**
+     * Creates view and initialises required viewmodels
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +39,10 @@ class RegisterFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
+    /**
+     * Adds clicklistener to the SignInButton which will try to register and log the user in
+     * Observes the userviewmodel's UIMessage to update UI accordingly
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,6 +72,9 @@ class RegisterFragment : Fragment() {
         btn_register.setOnClickListener { attemptRegister() }
     }
 
+    /**
+     * Checks the EditText requirements
+     */
     private fun attemptRegister() {
 // Reset errors.
         register_email.error = null

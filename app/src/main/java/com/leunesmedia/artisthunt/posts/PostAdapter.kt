@@ -18,44 +18,59 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_post.view.*
 import java.text.SimpleDateFormat
 
+/**
+ * Adapter for rv_posts
+ */
 class PostAdapter(
     lifecycleOwner: LifecycleOwner,
     val postViewModel: PostViewModel,
     val userViewModel: UserViewModel
 ) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    private val formatter = SimpleDateFormat("dd-MM-yyyy  hh:mm")
+    private val formatter = SimpleDateFormat("dd-MM-yyyy  HH:mm")
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
 
-
+    /**
+     * Observes a change in allPosts and notifies if it Changed so UI can update
+     */
     init {
         postViewModel.postRepo.allPosts.observe(lifecycleOwner, Observer {
             notifyDataSetChanged()
         })
     }
-
+    /**
+     * Uses item_post for recyclerview Items and returns PostViewHolder Class
+     */
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PostViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_post, p0, false)
         return PostViewHolder(view)
     }
-
+    /**
+     * returns count of allPosts from postRepo
+     */
     override fun getItemCount(): Int {
         if (postViewModel.postRepo.allPosts.value.isNullOrEmpty()) {
             return 0
         }
         return postViewModel.postRepo.allPosts.value?.size!!
     }
-
+    /**
+     * Binds Data from the allPosts to the PostViewHolder
+     * Checks if images has to be displayed or not
+     * Checks if Heart animation must be played
+     */
     override fun onBindViewHolder(p0: PostViewHolder, p1: Int) {
         p0.title.text = postViewModel.postRepo.allPosts.value!![p1].title
         p0.description.text = postViewModel.postRepo.allPosts.value!![p1].description
         p0.date.text = formatter.format(postViewModel.postRepo.allPosts.value!![p1].date)
         p0.counter.text = postViewModel.postRepo.allPosts.value!![p1].likers.size.toString()
+        //Checks if the LottieAnimation should begin as an empty heart or a full heart
         if (postViewModel.postRepo.allPosts.value!![p1].likers.contains(userViewModel.userRepo.user.value!!._id)) {
             p0.heart.frame = 140
         } else {
             p0.heart.frame = 0
         }
+        //This updates the LottieAnimation accordingly and changes the total likes
         p0.heart.setOnClickListener {
             if (postViewModel.postRepo.allPosts.value!![p1].likers.contains(userViewModel.userRepo.user.value!!._id)) {
                 //The user has already liked the post so unlikes it
@@ -74,8 +89,10 @@ class PostAdapter(
                 Model.updateLiker(userViewModel.userRepo.user.value!!._id!!)
             )
         }
+        //Uses Picasso to retrieve the Images async. Checks if Its an Image Post or Text Post
         if (postViewModel.postRepo.allPosts.value!![p1].post_image_filename != null && postViewModel.postRepo.allPosts.value!![p1].type == PostType.IMAGE.toString()) {
             p0.image.visibility = View.VISIBLE
+            //We should Cancel the Request, otherwhise all the posts will have images on the wrong place (Because of RecyclerView)
             Picasso.get().cancelRequest(p0.image)
             Picasso.get().load(SERVER_IMG_URL + postViewModel.postRepo.allPosts.value!![p1].post_image_filename)
                 .into(p0.image)
@@ -85,6 +102,9 @@ class PostAdapter(
         }
     }
 
+    /**
+     * ViewHolder Class for Posts that gets required Items to bind data to
+     */
     inner class PostViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val title: TextView = v.post_Title
         val description: TextView = v.post_Description

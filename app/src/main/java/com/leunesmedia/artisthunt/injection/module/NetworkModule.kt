@@ -16,26 +16,35 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+/**
+ * NetworkModule Class is a Dagger Module that provides the API's, RetrofitInterface and OkHttpClient
+ */
 @Module
 class NetworkModule {
     val API_BASE_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001"
-    val LOCAL_BASE_URL = "http://192.168.0.177:3000"
 
+    /**
+     * Provides the UserAPI with (retrofit)
+     */
     @Provides
     internal fun provideUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
     }
-
+    /**
+     * Provides the PostAPI with (retrofit)
+     */
     @Provides
     internal fun providePostApi(retrofit: Retrofit): PostApi {
         return retrofit.create(PostApi::class.java)
     }
 
+    /**
+     * Provides Retrofit with (okHttpClient) and adds a DateAdapter to the MoshiConverter
+     */
     @Provides
     internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
         val dateadapter = Moshi.Builder()
             .add(DateAdapter())
-
             .build()
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
@@ -45,6 +54,9 @@ class NetworkModule {
             .build()
     }
 
+    /**
+     * Provides the OkHttpClient with (authToken). The client adds an AuthenticationInterceptor
+     */
     @Provides
     internal fun provideOkHttpClient(authToken: String): OkHttpClient {
         if (authToken != "none") {
@@ -62,7 +74,9 @@ class NetworkModule {
             addInterceptor(interceptor)
         }.build()
     }
-
+    /**
+     * Provides the User's Bearer Token from Shared Preferences with (context)
+     */
     @Provides
     internal fun getAuthToken(context: Context): String {
         return context

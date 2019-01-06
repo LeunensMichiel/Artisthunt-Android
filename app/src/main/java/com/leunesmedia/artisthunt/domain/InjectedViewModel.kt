@@ -5,6 +5,9 @@ import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import com.leunesmedia.artisthunt.injection.App
 
+/**
+ * This abstract class is used to Inject the network in the child viewmodels
+ */
 abstract class InjectedViewModel: ViewModel() {
 
     init {

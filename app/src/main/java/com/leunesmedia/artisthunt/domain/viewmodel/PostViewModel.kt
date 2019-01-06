@@ -17,6 +17,10 @@ import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * This viewmodel class contains all the networking and repository logic for a post and injects PostRepository, UserRepository and PostAPI
+ * It contains a uiMessage and the userPosts of the current User which the UI can observe
+ */
 class PostViewModel : InjectedViewModel() {
     var uiMessage = MutableLiveData<Model.Message>()
     var userPosts = MutableLiveData<List<Model.Post>>()
@@ -31,9 +35,8 @@ class PostViewModel : InjectedViewModel() {
 
 
     /**
-     * Hier worden alle posts opgehaald. Deze methode word opgeroepen in de postfragment.
-     * Bij succes wordt de posts geupdated en wordt de observer in postfragment getriggered.
-     * UiMessage zorgt ervoor dat de UI correct wordt geupdated
+     * All Posts are retrieved and shown to the user. UiMessage gets updated on Result and ond Error
+     * If the Room Database doesn't contain a post from the result, it is added here to the Database
      */
     fun retrieveAllPosts() {
         subscription = postApi.getPosts()
@@ -50,15 +53,16 @@ class PostViewModel : InjectedViewModel() {
 
                 },
                 { error ->
+                    Log.d("HIHIHI", error.message)
                     uiMessage.postValue(Model.Message("retrieveAllPostsError"))
                 }
             )
     }
 
     /**
-     * Hier worden alle posts opgehaald van de USER. Deze methode word opgeroepen in de postfragment.
-     * Bij succes wordt de posts geupdated en wordt de observer in postfragment getriggered.
-     * UiMessage zorgt ervoor dat de UI correct wordt geupdated
+     * All User Posts are retrieved and shown to the user. UiMessage gets updated on Result and ond Error
+     * If the Room Database doesn't contain a userpost from the result, it is added here to the Database
+     * The userPosts LiveData gets populated with data from the Room Database
      */
     fun retrieveUserPosts() {
         subscription = postApi.getUserPosts(userRepo.user.value?._id!!)
@@ -81,6 +85,10 @@ class PostViewModel : InjectedViewModel() {
             )
     }
 
+    /**
+     * Text Post is added and inserted in the Server and Local Room Database
+     * UiMessage is updated accordingly
+     */
     fun addPost(post: Model.Post) {
         subscription = postApi.addPost(post)
             .subscribeOn(Schedulers.io())
@@ -97,6 +105,10 @@ class PostViewModel : InjectedViewModel() {
             )
     }
 
+    /**
+     * Image Post is added and inserted in the Server and Local Room Database
+     * UiMessage is updated accordingly
+     */
     fun addImagePost(file: File, bitmap: Bitmap, post: Model.Post) {
         val reqFile = RequestBody.create(
             MediaType.parse("image/jpg"),
@@ -112,12 +124,18 @@ class PostViewModel : InjectedViewModel() {
                     uiMessage.postValue(Model.Message("addPostImageSucces"))
                 },
                 { error ->
+                    Log.d("HIHIHI", error.message)
                     uiMessage.postValue(Model.Message("addPostImageError"))
                 }
             )
 
     }
 
+    /**
+     * Tries to update the likes for a post.
+     * If succesful, the post shall be liked or unliked accordingly and room database gets updated
+     * UiMessage is updated accordingly
+     */
     fun updateLikers(post : Model.Post, liker: Model.updateLiker) {
         subscription = postApi.updatePostLikers(post._id!!, liker)
             .subscribeOn(Schedulers.io())
