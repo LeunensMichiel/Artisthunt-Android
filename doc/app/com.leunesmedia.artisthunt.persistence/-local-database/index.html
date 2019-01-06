@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LocalDatabase - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.persistence</a>&nbsp;/&nbsp;<a href="./index.html">LocalDatabase</a><br/>
+<br/>
+<h1>LocalDatabase</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">LocalDatabase</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">RoomDatabase</span></code>
+<p>Room Database Class</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">LocalDatabase</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Room Database Class</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="post-dao.html">postDao</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">postDao</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.persistence.local_db.dao/-post-dao/index.html"><span class="identifier">PostDao</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-dao.html">userDao</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">userDao</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.persistence.local_db.dao/-user-dao/index.html"><span class="identifier">UserDao</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-d-a-t-a-b-a-s-e_-n-a-m-e.html">DATABASE_NAME</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">DATABASE_NAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-database.html">getDatabase</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getDatabase</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.persistence.LocalDatabase.Companion$getDatabase(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">LocalDatabase</span></a></code>
+<p>Returns LocalDatabase Room Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UserPostAdapter - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.profile</a>&nbsp;/&nbsp;<a href="./index.html">UserPostAdapter</a><br/>
+<br/>
+<h1>UserPostAdapter</h1>
+<code><span class="keyword">class </span><span class="identifier">UserPostAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><a href="-user-post-view-holder/index.html"><span class="identifier">UserPostViewHolder</span></a><span class="symbol">&gt;</span></code>
+<p>Adapter for user_posts</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-user-post-view-holder/index.html">UserPostViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">inner</span> <span class="keyword">class </span><span class="identifier">UserPostViewHolder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span></code>
+<p>ViewHolder Class for UserPosts that gets required Items to bind data to</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">UserPostAdapter</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$<init>(android.arch.lifecycle.LifecycleOwner, com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel, com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel)/lifecycleOwner">lifecycleOwner</span><span class="symbol">:</span>&nbsp;<span class="identifier">LifecycleOwner</span><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$<init>(android.arch.lifecycle.LifecycleOwner, com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel, com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel)/postViewModel">postViewModel</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-post-view-model/index.html"><span class="identifier">PostViewModel</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$<init>(android.arch.lifecycle.LifecycleOwner, com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel, com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel)/userViewModel">userViewModel</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-user-view-model/index.html"><span class="identifier">UserViewModel</span></a><span class="symbol">)</span></code>
+<p>Adapter for user_posts</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="post-view-model.html">postViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">postViewModel</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-post-view-model/index.html"><span class="identifier">PostViewModel</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-view-model.html">userViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">userViewModel</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-user-view-model/index.html"><span class="identifier">UserViewModel</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-item-count.html">getItemCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>returns count of userposts from postRepo</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-bind-view-holder.html">onBindViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$onBindViewHolder(com.leunesmedia.artisthunt.profile.UserPostAdapter.UserPostViewHolder, kotlin.Int)/p0">p0</span><span class="symbol">:</span>&nbsp;<a href="-user-post-view-holder/index.html"><span class="identifier">UserPostViewHolder</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$onBindViewHolder(com.leunesmedia.artisthunt.profile.UserPostAdapter.UserPostViewHolder, kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Binds Data from the userPosts to the UserPostViewHolder
+Checks if images has to be displayed or not and loads them with Picasso</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-create-view-holder.html">onCreateViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/p0">p0</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.profile.UserPostAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-user-post-view-holder/index.html"><span class="identifier">UserPostViewHolder</span></a></code>
+<p>Uses item_userpost for recyclerview Items and returns UserPostViewHolder Class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

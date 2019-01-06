@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PostApi - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.network.API</a>&nbsp;/&nbsp;<a href="./index.html">PostApi</a><br/>
+<br/>
+<h1>PostApi</h1>
+<code><span class="keyword">interface </span><span class="identifier">PostApi</span></code>
+<p>Retrofit Interface for working with Post Objects over the Network</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-image-post.html">addImagePost</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">addImagePost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$addImagePost(com.leunesmedia.artisthunt.domain.Model.Post, okhttp3.MultipartBody.Part)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$addImagePost(com.leunesmedia.artisthunt.domain.Model.Post, okhttp3.MultipartBody.Part)/file">file</span><span class="symbol">:</span>&nbsp;<span class="identifier">Part</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>Adds a Post Object containing an Image and uses Multipart Form Data</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-post.html">addPost</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">addPost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$addPost(com.leunesmedia.artisthunt.domain.Model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>Adds A Post Object with just Text</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-posts.html">getPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getPosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Retrieves all Post Objects</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-user-posts.html">getUserPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getUserPosts</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$getUserPosts(kotlin.String)/user_id">user_id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Retrieves all User's Post Objects</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-post-likers.html">updatePostLikers</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">updatePostLikers</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$updatePostLikers(kotlin.String, com.leunesmedia.artisthunt.domain.Model.updateLiker)/post_id">post_id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.network.API.PostApi$updatePostLikers(kotlin.String, com.leunesmedia.artisthunt.domain.Model.updateLiker)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/update-liker/index.html"><span class="identifier">updateLiker</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/update-liker/index.html"><span class="identifier">updateLiker</span></a><span class="symbol">&gt;</span></code>
+<p>Updates the likes of a Post</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PostViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.domain.viewmodel</a>&nbsp;/&nbsp;<a href="./index.html">PostViewModel</a><br/>
+<br/>
+<h1>PostViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">PostViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>This viewmodel class contains all the networking and repository logic for a post and injects PostRepository, UserRepository and PostAPI
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">PostViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This viewmodel class contains all the networking and repository logic for a post and injects PostRepository, UserRepository and PostAPI
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="post-api.html">postApi</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">postApi</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.network.-a-p-i/-post-api/index.html"><span class="identifier">PostApi</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="post-repo.html">postRepo</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">postRepo</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.persistence.local_db.repository/-post-repository/index.html"><span class="identifier">PostRepository</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="ui-message.html">uiMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">uiMessage</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-message/index.html"><span class="identifier">Message</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-posts.html">userPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">userPosts</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-repo.html">userRepo</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">userRepo</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.persistence.local_db.repository/-user-respository/index.html"><span class="identifier">UserRespository</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-image-post.html">addImagePost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addImagePost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$addImagePost(java.io.File, android.graphics.Bitmap, com.leunesmedia.artisthunt.domain.Model.Post)/file">file</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$addImagePost(java.io.File, android.graphics.Bitmap, com.leunesmedia.artisthunt.domain.Model.Post)/bitmap">bitmap</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$addImagePost(java.io.File, android.graphics.Bitmap, com.leunesmedia.artisthunt.domain.Model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Image Post is added and inserted in the Server and Local Room Database
+UiMessage is updated accordingly</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-post.html">addPost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$addPost(com.leunesmedia.artisthunt.domain.Model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Text Post is added and inserted in the Server and Local Room Database
+UiMessage is updated accordingly</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="retrieve-all-posts.html">retrieveAllPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">retrieveAllPosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>All Posts are retrieved and shown to the user. UiMessage gets updated on Result and ond Error
+If the Room Database doesn't contain a post from the result, it is added here to the Database</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="retrieve-user-posts.html">retrieveUserPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">retrieveUserPosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>All User Posts are retrieved and shown to the user. UiMessage gets updated on Result and ond Error
+If the Room Database doesn't contain a userpost from the result, it is added here to the Database
+The userPosts LiveData gets populated with data from the Room Database</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-likers.html">updateLikers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">updateLikers</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$updateLikers(com.leunesmedia.artisthunt.domain.Model.Post, com.leunesmedia.artisthunt.domain.Model.updateLiker)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">, </span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel$updateLikers(com.leunesmedia.artisthunt.domain.Model.Post, com.leunesmedia.artisthunt.domain.Model.updateLiker)/liker">liker</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/update-liker/index.html"><span class="identifier">updateLiker</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Tries to update the likes for a post.
+If succesful, the post shall be liked or unliked accordingly and room database gets updated
+UiMessage is updated accordingly</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

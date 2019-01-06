@@ -11,24 +11,18 @@ Download the full APK from here or from the Play Store
 
 An Android phone with at least API 19 (Kitkat 4.4)
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
 ### Break down into end to end tests
 
-Explain what these tests test and why
+The tests consist of testing the Login, Register UI and Room Database functionality
 
 ```
-Give an example
-```
+@Test
+    fun insertingUserSavesUser() {
+        userDao.insert(user)
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+        val dbUser = userDao.getUser()
+        assert(dbUser.value?.firstname == user.firstname)
+    }
 ```
 
 ## Built With

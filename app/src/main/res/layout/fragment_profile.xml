@@ -33,7 +33,7 @@
                     android:focusable="true"
                     android:clickable="true"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:cropToPadding="false" android:scaleType="centerCrop"/>
+                    android:cropToPadding="false" android:scaleType="centerCrop" tools:targetApi="lollipop"/>
 
             <TextView
                     android:id="@+id/profileFragment_profilename"

@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UserViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.domain.viewmodel</a>&nbsp;/&nbsp;<a href="./index.html">UserViewModel</a><br/>
+<br/>
+<h1>UserViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">UserViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>This viewmodel class contains all the networking and repository logic for a user and injects UserRepository and UserApi
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">UserViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This viewmodel class contains all the networking and repository logic for a user and injects UserRepository and UserApi
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="ui-message.html">uiMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">uiMessage</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-message/index.html"><span class="identifier">Message</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-api.html">userApi</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">userApi</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.network.-a-p-i/-user-api/index.html"><span class="identifier">UserApi</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="user-repo.html">userRepo</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">userRepo</span><span class="symbol">: </span><a href="../../com.leunesmedia.artisthunt.persistence.local_db.repository/-user-respository/index.html"><span class="identifier">UserRespository</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="change-profile-picture.html">changeProfilePicture</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeProfilePicture</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel$changeProfilePicture(java.io.File)/file">file</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Tries to change the user's profile picture and sends the (file) to the server
+On Succes, the user gets updated in the RoomDatabase</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="login.html">login</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">login</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel$login(com.leunesmedia.artisthunt.domain.Model.Login)/loginDetails">loginDetails</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-login/index.html"><span class="identifier">Login</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Tries to log the user in and sends API call to the Server with (loginDetails).
+On succes the method onRetrieveUserSucces is called
+Uimessage is updated accordingly</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="register.html">register</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">register</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel$register(com.leunesmedia.artisthunt.domain.Model.Register)/registerDetails">registerDetails</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-register/index.html"><span class="identifier">Register</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Tries to register the user and sends API call to the Server with (registerDetails). On succes the method
+onRetrieveUserSucces is called
+Uimessage is updated accordingly</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

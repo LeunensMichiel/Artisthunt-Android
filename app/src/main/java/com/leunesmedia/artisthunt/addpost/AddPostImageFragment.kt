@@ -109,8 +109,6 @@ class AddPostImageFragment : Fragment() {
                         activity as MainActivity,
                         arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
                     )
-                } else {
-                    selectImage()
                 }
                 if (ContextCompat.checkSelfPermission(
                         activity as MainActivity,

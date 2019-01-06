@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PostDao - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.persistence.local_db.dao</a>&nbsp;/&nbsp;<a href="./index.html">PostDao</a><br/>
+<br/>
+<h1>PostDao</h1>
+<code><span class="keyword">interface </span><span class="identifier">PostDao</span></code>
+<p>RoomDao for Posts</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-all-posts.html">getAllPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllPosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Returns All Posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-post.html">getPost</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getPost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao$getPost(kotlin.String)/postID">postID</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>Returns a specific Post filtering on (postID)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-user-posts.html">getUserPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getUserPosts</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao$getUserPosts(kotlin.String)/user_id">user_id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>Returns All the Posts of a user filtering on (user_id)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="insert.html">insert</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">insert</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao$insert(com.leunesmedia.artisthunt.domain.Model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Inserts A post</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="nuke-posts.html">nukePosts</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">nukePosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Deletes All Posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-post.html">updatePost</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">updatePost</span><span class="symbol">(</span><span class="identifier" id="com.leunesmedia.artisthunt.persistence.local_db.dao.PostDao$updatePost(com.leunesmedia.artisthunt.domain.Model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../com.leunesmedia.artisthunt.domain/-model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Updates a post</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

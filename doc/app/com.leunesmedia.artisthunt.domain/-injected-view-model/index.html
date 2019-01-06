@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>InjectedViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.leunesmedia.artisthunt.domain</a>&nbsp;/&nbsp;<a href="./index.html">InjectedViewModel</a><br/>
+<br/>
+<h1>InjectedViewModel</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">InjectedViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewModel</span></code>
+<p>This abstract class is used to Inject the network in the child viewmodels</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">InjectedViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This abstract class is used to Inject the network in the child viewmodels</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-post-view-model/index.html">PostViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PostViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>This viewmodel class contains all the networking and repository logic for a post and injects PostRepository, UserRepository and PostAPI
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.leunesmedia.artisthunt.domain.viewmodel/-user-view-model/index.html">UserViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UserViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>This viewmodel class contains all the networking and repository logic for a user and injects UserRepository and UserApi
+It contains a uiMessage and the userPosts of the current User which the UI can observe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
