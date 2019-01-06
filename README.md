@@ -5,7 +5,7 @@ This is an app for musicians, by fellow musicians. Find eachother, colab and mak
 ## Getting Started
 
 Download the full APK from here or from the Play Store
-> [ArtistHunt APK](https://drive.google.com/file/d/11xaRIe_daTBnPqjip8lA6W6xrTaDe594/view?usp=sharing)
+> [ArtistHunt APK](https://drive.google.com/file/d/1GomuOmWdP_KsUwzLAD1S6UHjv-ioo_dW/view?usp=sharing)
 
 ### Prerequisites
 
