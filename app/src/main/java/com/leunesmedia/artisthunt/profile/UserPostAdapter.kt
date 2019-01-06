@@ -52,7 +52,11 @@ class UserPostAdapter(
         if (dataSet[p1].post_image_filename != null) {
             p0.title.text = ""
             Picasso.get().cancelRequest(p0.image)
-            Picasso.get().load(SERVER_IMG_URL + dataSet[p1].post_image_filename).into(p0.image)
+            Picasso.get()
+                .load(SERVER_IMG_URL + dataSet[p1].post_image_filename)
+                .resize(100, 100)
+                .centerCrop()
+                .into(p0.image)
         } else {
             p0.image.setImageDrawable(null)
             p0.title.text = dataSet[p1].title

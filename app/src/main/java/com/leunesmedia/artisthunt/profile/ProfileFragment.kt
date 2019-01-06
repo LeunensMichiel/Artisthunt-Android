@@ -6,6 +6,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,11 +56,15 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        postViewModel.retrieveUserPosts()
 
         postViewModel.userPosts.observe(this, Observer {
-            if (it.isNullOrEmpty()){
+            if (it == null || it.isEmpty()) {
                 postViewModel.retrieveUserPosts()
+                empty_userposts.visibility = View.VISIBLE
+                rv_userPosts.visibility = View.GONE
+            } else {
+                empty_userposts.visibility = View.GONE
+                rv_userPosts.visibility = View.VISIBLE
             }
         })
 
@@ -110,7 +116,13 @@ class ProfileFragment : Fragment() {
 
         }
 
-        val viewManager = GridLayoutManager((activity as MainActivity), 3)
+        var viewManager : RecyclerView.LayoutManager
+        if ((activity as MainActivity).resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            viewManager = GridLayoutManager((activity as MainActivity), 3)
+        } else {
+            viewManager = GridLayoutManager((activity as MainActivity), 5)
+        }
+
         val viewAdapter = UserPostAdapter(this, postViewModel, userViewModel)
         rv_userPosts.apply {
             layoutManager = viewManager

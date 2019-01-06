@@ -73,9 +73,6 @@ class PostViewModel : InjectedViewModel() {
                         }
                     }
                     userPosts.postValue(result)
-                    Log.d("HIHIHI", postRepo.allPosts.value?.size.toString())
-                    Log.d("HIHIHI", postRepo.getUserPosts(userRepo.user.value?._id!!).size.toString())
-                    Log.d("HIHI", userPosts.value!!.toString())
                     uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
                 },
                 { error ->
@@ -136,7 +133,7 @@ class PostViewModel : InjectedViewModel() {
                     uiMessage.postValue(Model.Message("likesUpdated"))
                 },
                 { error ->
-                    Log.d("HIHIHI", error.message)
+                    Log.d("updateError", error.message)
                     uiMessage.postValue(Model.Message("likesUpdateError"))
                 }
             )

@@ -27,7 +27,7 @@ class PostAdapter(
     private val formatter = SimpleDateFormat("dd-MM-yyyy  hh:mm")
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
 
-    
+
     init {
         postViewModel.postRepo.allPosts.observe(lifecycleOwner, Observer {
             notifyDataSetChanged()
