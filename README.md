@@ -5,11 +5,12 @@ This is an for musicians, by fellow musicians. Find eachother, colab and make so
 ## Getting Started
 
 Download the full APK from here or from the Play Store
-> [ArtistHunt APK](#)
+> [ArtistHunt APK](https://drive.google.com/file/d/11xaRIe_daTBnPqjip8lA6W6xrTaDe594/view?usp=sharing)
 
 ### Prerequisites
 
 An Android phone with at least API 19 (Kitkat 4.4)
+Make sure you have install from unknown sources enabled
 
 ### Break down into end to end tests
 
@@ -24,6 +25,9 @@ The tests consist of testing the Login, Register UI and Room Database functional
         assert(dbUser.value?.firstname == user.firstname)
     }
 ```
+## Documentation
+
+Inside Doc Folder
 
 ## Built With
 
@@ -39,6 +43,7 @@ The tests consist of testing the Login, Register UI and Room Database functional
 * [CircularImageView](https://github.com/lopspower/CircularImageView) - A Circular ImageView for Android
 * [Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper) - Image Cropper for Android
 * [Picasso](http://square.github.io/picasso/) - Proper async image loading
+* [Dokka](https://github.com/Kotlin/dokka) - Documentation Generator for Kotlin
 
 ## Versioning
 
