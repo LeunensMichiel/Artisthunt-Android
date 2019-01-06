@@ -47,7 +47,7 @@ class PostsFragment : Fragment() {
                 "retrieveAllPostsSucces" -> {
                 }
                 "retrieveAllPostsError" -> {
-                    it.data = "Error loading all posts"
+                    it.data = "Loading Error. Check Internet Connection"
                     Toast.makeText(activity as MainActivity, it.data, Toast.LENGTH_SHORT).show()
                 }
             }
