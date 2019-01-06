@@ -1,6 +1,6 @@
 # Artist Hunt
 
-This is an for musicians, by fellow musicians. Find eachother, colab and make some new music together!
+This is an app for musicians, by fellow musicians. Find eachother, colab and make some new music together!
 
 ## Getting Started
 
