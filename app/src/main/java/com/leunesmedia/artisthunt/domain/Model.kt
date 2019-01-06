@@ -16,7 +16,7 @@ object Model {
         var firstname: String? = null,
         var lastname: String? = null,
         var email: String? = null,
-        var token: String?,
+        var token: String? = null,
         var profile_image_filename: String? = null
         ) {
         @PrimaryKey(autoGenerate = true)

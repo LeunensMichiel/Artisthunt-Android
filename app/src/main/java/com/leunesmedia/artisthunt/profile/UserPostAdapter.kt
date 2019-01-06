@@ -22,7 +22,6 @@ class UserPostAdapter(
 
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
 
-
     init {
         postViewModel.userPosts.observe(lifecycleOwner, Observer {
             notifyDataSetChanged()

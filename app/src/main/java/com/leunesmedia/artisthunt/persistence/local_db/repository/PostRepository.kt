@@ -12,7 +12,9 @@ class PostRepository(private val dao: PostDao) {
     fun getSinglePost(postid: String) : LiveData<Model.Post> {
            return dao.getPost(postid)
     }
-    fun getUserPosts(userid: String) : LiveData<List<Model.Post>> {
+    @WorkerThread
+    fun getUserPosts(userid: String) : List<Model.Post> {
+//            Log.d("HIHO", dao.getUserPosts("5c19564a2c643b702d7f1981").size.toString())
            return dao.getUserPosts(userid)
     }
 

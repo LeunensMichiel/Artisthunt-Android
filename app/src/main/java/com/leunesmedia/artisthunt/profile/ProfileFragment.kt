@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -28,7 +27,6 @@ import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_profile.*
-import org.jetbrains.anko.imageBitmap
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -56,18 +54,28 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postViewModel.retrieveUserPosts()
+
+//        postViewModel.userPosts.observe(this, Observer {
+//            if (it.isNullOrEmpty()){
+//                postViewModel.retrieveUserPosts()
+//            }
+//        })
 
         userViewModel.userRepo.user.observe(this, Observer {
-            postViewModel.retrieveUserPosts()
             profileFragment_profilename.text =
                     "${userViewModel.userRepo.user.value?.firstname} ${userViewModel.userRepo.user.value?.lastname}"
             profileFragment_favGenreText.text = "Punk Rock"
             profileFragment_favArtistText.text = "Foo Fighters"
             profileFragment_favInstrumentText.text = "Guitar"
-            profileFragment_profilepic.setColorFilter(Color.argb(0, 255, 255, 255))
 
             if (it!!.profile_image_filename != null) {
-                Picasso.get().load(SERVER_IMG_URL + userViewModel.userRepo.user.value?.profile_image_filename!!).into(profileFragment_profilepic)
+                Picasso.get()
+                    .load(SERVER_IMG_URL + userViewModel.userRepo.user.value?.profile_image_filename!!)
+                    .placeholder(R.drawable.person_icon)
+                    .resize(250, 250)
+                    .centerCrop()
+                    .into(profileFragment_profilepic)
             }
         })
 
@@ -132,9 +140,6 @@ class ProfileFragment : Fragment() {
                 fos.write(bos.toByteArray())
                 fos.flush()
                 fos.close()
-
-                profileFragment_profilepic.imageBitmap = bitmap
-                profileFragment_profilepic.setColorFilter(Color.argb(50, 255, 255, 255))
 
                 userViewModel.changeProfilePicture(file, bitmap)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

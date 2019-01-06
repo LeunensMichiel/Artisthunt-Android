@@ -73,7 +73,6 @@ class PostViewModel : InjectedViewModel() {
                         }
                     }
                     userPosts.postValue(result)
-                    uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
                 },
                 { error ->
                     uiMessage.postValue(Model.Message("retrieveUserPostsError"))
