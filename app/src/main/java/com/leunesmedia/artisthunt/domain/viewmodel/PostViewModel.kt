@@ -19,8 +19,7 @@ import javax.inject.Inject
 
 class PostViewModel : InjectedViewModel() {
     var uiMessage = MutableLiveData<Model.Message>()
-    var userPosts = MutableLiveData<Array<Model.Post>>()
-
+    var userPosts = MutableLiveData<List<Model.Post>>()
     private lateinit var subscription: Disposable
 
     @Inject
@@ -72,10 +71,11 @@ class PostViewModel : InjectedViewModel() {
                             postRepo.insert(it)
                         }
                     }
-                    userPosts.postValue(result)
+                    userPosts.postValue(postRepo.getUserPosts(userRepo.user.value?._id!!))
                     uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
                 },
                 { error ->
+                    userPosts.postValue(postRepo.getUserPosts(userRepo.user.value?._id!!))
                     uiMessage.postValue(Model.Message("retrieveUserPostsError"))
                 }
             )

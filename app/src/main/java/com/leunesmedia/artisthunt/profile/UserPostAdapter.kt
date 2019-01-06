@@ -22,7 +22,7 @@ class UserPostAdapter(
 ) : RecyclerView.Adapter<UserPostAdapter.UserPostViewHolder>() {
 
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
-    private var dataSet: Array<Model.Post> = arrayOf()
+    private var dataSet: List<Model.Post> = mutableListOf()
 
 
     init {
@@ -34,7 +34,7 @@ class UserPostAdapter(
                 dataSet = it
                 notifyDataSetChanged()
             } else {
-                dataSet = arrayOf()
+                dataSet = mutableListOf()
                 notifyDataSetChanged()
             }
         })
