@@ -40,7 +40,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/progressBar_AddPostImage" android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.5"
             android:scaleType="centerInside" android:background="@color/colorSecondaryDark"/>
     <Button
             android:text="@string/button_post"

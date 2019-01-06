@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.leunesmedia.artisthunt.R
+import com.leunesmedia.artisthunt.domain.Model
 import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
 import com.squareup.picasso.Picasso
@@ -21,10 +22,21 @@ class UserPostAdapter(
 ) : RecyclerView.Adapter<UserPostAdapter.UserPostViewHolder>() {
 
     private val SERVER_IMG_URL = "http://projecten3studserver03.westeurope.cloudapp.azure.com:3001/images/"
+    private var dataSet: Array<Model.Post> = arrayOf()
+
 
     init {
+        if (postViewModel.userPosts.value != null) {
+            dataSet = postViewModel.userPosts.value!!
+        }
         postViewModel.userPosts.observe(lifecycleOwner, Observer {
-            notifyDataSetChanged()
+            if (it != null) {
+                dataSet = it
+                notifyDataSetChanged()
+            } else {
+                dataSet = arrayOf()
+                notifyDataSetChanged()
+            }
         })
     }
 
@@ -33,20 +45,17 @@ class UserPostAdapter(
     }
 
     override fun getItemCount(): Int {
-        if (postViewModel.userPosts.value.isNullOrEmpty()) {
-            return 0
-        }
-        return postViewModel.userPosts.value?.size!!
+        return dataSet.size
     }
 
     override fun onBindViewHolder(p0: UserPostAdapter.UserPostViewHolder, p1: Int) {
-        if (postViewModel.userPosts.value?.get(p1)?.post_image_filename != null) {
+        if (dataSet[p1].post_image_filename != null) {
             p0.title.text = ""
             Picasso.get().cancelRequest(p0.image)
-            Picasso.get().load(SERVER_IMG_URL + postViewModel.userPosts.value!![p1].post_image_filename).into(p0.image)
+            Picasso.get().load(SERVER_IMG_URL + dataSet[p1].post_image_filename).into(p0.image)
         } else {
             p0.image.setImageDrawable(null)
-            p0.title.text = postViewModel.userPosts.value!![p1].title
+            p0.title.text = dataSet[p1].title
         }
     }
 

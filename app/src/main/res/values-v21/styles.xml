@@ -4,6 +4,7 @@
         <item name="android:colorAccent">@color/colorPrimary</item>
         <item name="android:colorPrimary">@color/colorSecondary</item>
         <item name="android:colorPrimaryDark">@color/colorSecondaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@color/colorSecondary</item>
         <item name="android:colorForeground">@color/colorPrimaryDark</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
@@ -13,5 +14,25 @@
         <item name="android:windowBackground">@color/colorSecondary</item>
         <item name="colorPrimary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="actionOverflowButtonStyle">@style/overflowButton</item>
+    </style>
+
+    <style name="overflowButton" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/anthemie</item>
+    </style>
+
+    <style name="ThemeOverlay.customPopup" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryText</item>
     </style>
 </resources>

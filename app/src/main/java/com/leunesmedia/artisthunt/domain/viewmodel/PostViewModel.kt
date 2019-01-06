@@ -73,6 +73,10 @@ class PostViewModel : InjectedViewModel() {
                         }
                     }
                     userPosts.postValue(result)
+                    Log.d("HIHIHI", postRepo.allPosts.value?.size.toString())
+                    Log.d("HIHIHI", postRepo.getUserPosts(userRepo.user.value?._id!!).size.toString())
+                    Log.d("HIHI", userPosts.value!!.toString())
+                    uiMessage.postValue(Model.Message("retrieveUserPostsSucces"))
                 },
                 { error ->
                     uiMessage.postValue(Model.Message("retrieveUserPostsError"))

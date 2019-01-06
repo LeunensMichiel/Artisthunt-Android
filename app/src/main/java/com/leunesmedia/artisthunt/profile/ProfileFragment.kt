@@ -54,15 +54,16 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postViewModel.retrieveUserPosts()
+//        postViewModel.retrieveUserPosts()
 
-//        postViewModel.userPosts.observe(this, Observer {
-//            if (it.isNullOrEmpty()){
-//                postViewModel.retrieveUserPosts()
-//            }
-//        })
+        postViewModel.userPosts.observe(this, Observer {
+            if (it.isNullOrEmpty()){
+                postViewModel.retrieveUserPosts()
+            }
+        })
 
         userViewModel.userRepo.user.observe(this, Observer {
+            postViewModel.retrieveUserPosts()
             profileFragment_profilename.text =
                     "${userViewModel.userRepo.user.value?.firstname} ${userViewModel.userRepo.user.value?.lastname}"
             profileFragment_favGenreText.text = "Punk Rock"

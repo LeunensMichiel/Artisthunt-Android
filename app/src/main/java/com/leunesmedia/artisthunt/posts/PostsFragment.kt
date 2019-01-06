@@ -11,11 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.leunesmedia.artisthunt.MainActivity
-
 import com.leunesmedia.artisthunt.R
 import com.leunesmedia.artisthunt.domain.viewmodel.PostViewModel
 import com.leunesmedia.artisthunt.domain.viewmodel.UserViewModel
-import com.leunesmedia.artisthunt.utils.RV_PostDecorator
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment : Fragment() {
@@ -60,7 +58,7 @@ class PostsFragment : Fragment() {
         rv_posts.apply {
             layoutManager = viewManager
             adapter = viewAdapter
-            addItemDecoration(RV_PostDecorator(5))
+//            addItemDecoration(RV_PostDecorator(5))
         }
 
         postRefresher.setOnRefreshListener {

@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorSecondary">#fafafa</color>
     <color name="colorSecondaryLight">#ffffff</color>
-    <color name="colorSecondaryDark">#c7c7c7</color>
+    <color name="colorSecondaryDark">#dedede</color>
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorSecondaryText">#000000</color>
 </resources>

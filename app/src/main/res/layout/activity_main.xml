@@ -11,12 +11,15 @@
     <android.support.v7.widget.Toolbar
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/colorPrimaryText"
+            app:subtitleTextColor="@color/colorSecondaryDark"
             android:theme="?attr/actionBarTheme"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             android:minHeight="?android:attr/actionBarSize"
             android:id="@+id/main_toolbar" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:visibility="visible"/>
+            android:visibility="visible" app:popupTheme="@style/ThemeOverlay.customPopup"/>
 
     <FrameLayout
             android:layout_width="0dp"
@@ -31,11 +34,12 @@
             android:id="@+id/navigation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/navigation" app:itemIconTint="@drawable/bottom_navigation_color"
-            app:itemTextColor="@drawable/bottom_navigation_color" app:elevation="0dp"/>
+            app:itemTextColor="@drawable/bottom_navigation_color" app:elevation="0dp"
+            app:layout_constraintHorizontal_bias="0.0" android:background="@color/colorPrimary"
+            app:labelVisibilityMode="unlabeled"/>
 
 </android.support.constraint.ConstraintLayout>
