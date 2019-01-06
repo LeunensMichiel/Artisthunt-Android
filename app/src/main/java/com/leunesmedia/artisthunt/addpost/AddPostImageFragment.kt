@@ -1,6 +1,7 @@
 package com.leunesmedia.artisthunt.addpost
 
 
+import android.Manifest
 import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -108,6 +109,16 @@ class AddPostImageFragment : Fragment() {
                     ActivityCompat.requestPermissions(
                         activity as MainActivity,
                         arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+                    )
+                }
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(Manifest.permission.CAMERA), 1
                     )
                 }
                 if (ContextCompat.checkSelfPermission(

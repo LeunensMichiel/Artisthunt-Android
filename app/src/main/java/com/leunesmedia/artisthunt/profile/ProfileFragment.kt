@@ -131,6 +131,16 @@ class ProfileFragment : Fragment() {
                 }
                 if (ContextCompat.checkSelfPermission(
                         activity as MainActivity,
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        activity as MainActivity,
+                        arrayOf(Manifest.permission.CAMERA), 1
+                    )
+                }
+                if (ContextCompat.checkSelfPermission(
+                        activity as MainActivity,
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
